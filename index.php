@@ -1,43 +1,25 @@
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< Updated upstream
-    <title>Simple Homepage</title>
     <link rel="stylesheet" href="style.css">
-=======
-    <title>REPS - Homepage</title>
->>>>>>> Stashed changes
+    <title>Navbar learning</title>
 </head>
-
 <body>
-<<<<<<< Updated upstream
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <a href="#" class="logo">MARKETPLACE</a>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search products...">
-                    <button class="search-button"></button>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <h1>Welcome to MARKETPLACE</h1>
-        <p>Explore our products and find great deals!</p>
-    </main>
-
-    <script src="index.js"></script>
+  <div class="fContainer">
+    <nav class="wrapper">
+      <div class="brand">
+        <div class="firtsname">Crypto</div>
+        <div class="lastname">punk</div>
+      </div>
+      <ul class="navigation">
+        <li><a href="/">Koleksi</a></li>
+        <li><a href="/" class="active">Transaksi</a></li>
+        <li><a href="/">Aktifitas</a></li>
+        <li><img src="yansa.jpg" alt="..."></li>
+      </ul>
+    </nav>
+  </div>
 </body>
 </html>
-=======
-    <p><a href="login.php">login</a></p>
-    <p><a href="register.php">signup</a></p>
-</body>
-
-</html>
->>>>>>> Stashed changes
