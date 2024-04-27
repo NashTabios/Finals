@@ -20,7 +20,6 @@
     </header>
 
     <main>
-        <!-- Your content goes here -->
         <h1>Welcome to MARKETPLACE</h1>
         <p>Explore our products and find great deals!</p>
     </main>
