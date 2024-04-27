@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< Updated upstream
     <title>Simple Homepage</title>
     <link rel="stylesheet" href="style.css">
+=======
+    <title>REPS - Homepage</title>
+>>>>>>> Stashed changes
 </head>
+
 <body>
+<<<<<<< Updated upstream
     <header>
         <nav class="navbar">
             <div class="container">
@@ -27,3 +34,10 @@
     <script src="index.js"></script>
 </body>
 </html>
+=======
+    <p><a href="login.php">login</a></p>
+    <p><a href="register.php">signup</a></p>
+</body>
+
+</html>
+>>>>>>> Stashed changes
