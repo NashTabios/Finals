@@ -15,7 +15,7 @@
                     <li><a href="" class="active">Home</a></li>
                     <li><a href="">About</a></li>
                     <li><a href="">lorem</a></li>
-                    <li><a href="">lorm</a></li>
+                    <li><a href="">lorem</a></li>
                 </ul>
                 <div class="button">
                     <a href="" class="login">Login</a>
