@@ -6,7 +6,7 @@
 }
 
 /* Navbar styling */
-.navbar {
+#navbar {
     background-color: #00a859;
     color: #ffffff;
     padding: 10px 0;
@@ -24,6 +24,13 @@
     text-decoration: none;
     color: inherit;
     font-weight: bold;
+}
+
+.navbar-logo {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    /* Add your logo styling here */
 }
 
 .search-bar {
