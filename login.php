@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check input errors before checking credentials
     if (empty($email_address_err) && empty($pass_err)) {
         // Prepare a select statement
-        $sql = "SELECT id, email_address, pass FROM users WHERE email_address = ?";
+        $sql = "SELECT id, email_address, user_name, pass FROM users WHERE email_address = ?";
 
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
@@ -46,9 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Check if email address exists, if yes then verify password
                 if ($stmt->num_rows == 1) {
                     // Bind result variables
-                    $stmt->bind_result($id, $email_address, $hashed_pass);
+                    $stmt->bind_result($id, $email_address, $username, $hashed_pass);
                     if ($stmt->fetch()) {
-                        if (password_verify($pass, $hashed_pass)) {
+                        if ($pass == $hashed_pass) {
                             // Password is correct, so start a new session
                             session_start();
 
@@ -56,9 +56,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["email_address"] = $email_address;
+                            $_SESSION["user_name"] = $username;
 
-                            // Redirect user to welcome page
-                            header("location: welcome.php");
+                            // Redirect user to listing page
+                            header("location: listing.php");
                         } else {
                             // Display an error message if password is not valid
                             $pass_err = "The password you entered is not valid.";
@@ -88,12 +89,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REPS - Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 
 <body>
-<h2>Login</h2>
+    <h2>Login</h2>
     <p>Please fill in your credentials to login.</p>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <div class="form-group">
@@ -111,7 +113,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
     </form>
-
 </body>
 
 </html>
