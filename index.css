@@ -1,4 +1,4 @@
-/* Reset some default styles */
+/* Reset default styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,9 +6,9 @@
 }
 
 /* Navbar styling */
-#navbar {
-    background-color: #00a859; /* Green background color */
-    color: #ffffff; /* White text color */
+.navbar {
+    background-color: #00a859;
+    color: #ffffff;
     padding: 10px 0;
 }
 
@@ -20,70 +20,33 @@
     align-items: center;
 }
 
-.home-link {
-    display: flex;
-    align-items: center;
+.logo {
     text-decoration: none;
     color: inherit;
     font-weight: bold;
 }
 
-.navbar-logo {
-    /* Add your logo styling here */
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-button {
     width: 30px;
     height: 30px;
-    background-color: white;
-    border-radius: 50%;
-    margin-right: 10px;
+    background-color: #00a859;
+    /* Add search icon or styling here */
 }
 
-#navbar-toggle {
-    display: none; /* Hide toggle button initially */
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.icon-bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: #ffffff;
-    margin: 5px 0;
-}
-
-#navbar-menu {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-}
-
-.navbar-links {
-    list-style: none;
-    display: flex;
-}
-
-.navbar-item {
-    margin-right: 20px;
-}
-
-.navbar-link {
-    text-decoration: none;
-    color: inherit;
-    font-weight: 500;
-}
-
-/* Media query for mobile responsiveness */
-@media screen and (max-width: 768px) {
-    #navbar-toggle {
-        display: block;
-    }
-
-    #navbar-menu {
-        display: none;
-    }
-
-    #navbar-menu.active {
-        display: flex;
-    }
+/* Main content styling */
+main {
+    padding: 20px;
+    text-align: center;
 }
