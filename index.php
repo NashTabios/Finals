@@ -17,6 +17,7 @@
 </html>
     <p><a href="login.php">login</a></p>
     <p><a href="register.php">signup</a></p>
+    <p><a href="aboutus.php">about us</a></p>
 </body>
 
 </html>
