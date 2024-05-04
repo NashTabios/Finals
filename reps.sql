@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2024 at 09:55 AM
+-- Generation Time: May 04, 2024 at 09:58 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `reps`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `listing`
+--
+
+CREATE TABLE `listing` (
+  `listing_id` int(11) NOT NULL,
+  `listing_name` varchar(255) NOT NULL,
+  `listing_price` int(11) NOT NULL,
+  `listing_desc` text NOT NULL,
+  `listing_image` varchar(255) NOT NULL,
+  `user_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `listing`
+--
+
+INSERT INTO `listing` (`listing_id`, `listing_name`, `listing_price`, `listing_desc`, `listing_image`, `user_name`) VALUES
+(1, 'Tender Juicy', 200, 'adada', 'uploads/haha.jpg', 'kmocorro24'),
+(2, 'Tender Juicy', 200, 'haha', 'uploads/haha.jpg', 'kmocorro24'),
+(3, 'kenn', 2147483647, 'masyadong pogi kaya ibebenta ko na', 'uploads/436733367_399842039625877_7524423132831593595_n.jpg', 'kmocorro24'),
+(4, 'steph curry', 2001, 'im steph curry testing', 'uploads/steph.jpg', 'stephcurry30');
 
 -- --------------------------------------------------------
 
@@ -53,6 +78,12 @@ INSERT INTO `users` (`id`, `email_address`, `user_name`, `first_name`, `last_nam
 --
 
 --
+-- Indexes for table `listing`
+--
+ALTER TABLE `listing`
+  ADD PRIMARY KEY (`listing_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -61,6 +92,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `listing`
+--
+ALTER TABLE `listing`
+  MODIFY `listing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
