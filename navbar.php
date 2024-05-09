@@ -15,9 +15,7 @@
             <div class="progressBar" id="progressBar"></div>
         </div>
         <nav class="navbar">
-            <div class="logo">
-                <img src="logo.svg">
-            </div>
+            <div class="logo"> <img src="logo.svg"> </div>
 
             <ul class="nav-ul" id="nav_ul">
                 <li>
@@ -44,11 +42,9 @@
 
     <h1>dont touch</h1>
 
-
     <footer id="footer">
         <p>lorem</p>
     </footer>
-
 
     <script>
         hamburger.onclick = () => {
