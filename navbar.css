@@ -59,9 +59,17 @@ header a {
 .navbar {
     display: flex;
     justify-content: space-between;
-    height: 100%;
-    width: 100%;
+    align-items: center;
+    height: 60px; /* Set the height of the navbar */
+    width: 100%; /* Make the navbar take up 100% width */
+    background-color: #009506; /* Background color for the navbar */
+    position: fixed; /* Fix the navbar at the top */
+    top: 0; /* Position the navbar at the top of the viewport */
+    z-index: 1000; /* Ensure the navbar appears above other content */
+    padding: 0 20px; /* Add padding to the left and right */
+    box-sizing: border-box; /* Include padding in width calculation */
 }
+
 
 .logo {
     height: 100%;

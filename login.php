@@ -3,6 +3,7 @@ session_start();
 
 // Include config file
 require_once "config.php";
+include 'navbar.php';
 
 // Define variables and initialize with empty values
 $email_address = $pass = "";
