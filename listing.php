@@ -50,6 +50,17 @@ $mysqli->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listing Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card-body {
+            height: 200px; /* Set a fixed height for the card body */
+            overflow: hidden; /* Hide overflow content */
+        }
+
+        .card-img-top {
+            width: 100%; /* Ensure the image fills the container */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
 </head>
 
 <body>
@@ -58,6 +69,7 @@ $mysqli->close();
         <?php if (isset($user_name)) : ?>
             <p>Welcome, <?php echo htmlspecialchars($user_name); ?>!</p>
             <p><a href="createlisting.php">Create Listing</a></p>
+            <p><a href="profile.php">Profile</a></p>
         <?php else : ?>
             <p>Welcome! <a href="login.php">Log in</a> or <a href="register.php">Register</a> to create listings.</p>
         <?php endif; ?>
