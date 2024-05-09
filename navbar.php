@@ -15,7 +15,9 @@
             <div class="progressBar" id="progressBar"></div>
         </div>
         <nav class="navbar">
-            <div class="logo"><a href="">REPS</a></div>
+            <div class="logo">
+                <img src="logo.svg">
+            </div>
 
             <ul class="nav-ul" id="nav_ul">
                 <li>
@@ -40,7 +42,7 @@
         </nav>
     </header>
 
-    <h1>test</h1>
+    <h1>dont touch</h1>
 
 
     <footer id="footer">
