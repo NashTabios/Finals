@@ -139,80 +139,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             document.getElementById("saveButton").classList.toggle("d-none");
         }
     </script>
-    <style>
-    .row {
-            margin-right: 100px;
-        }
-    </style>
 </head>
 
-
-
-<div class="container"> 
-    <div class="row">
-            <div class="jumbotron p-3 mb-3" style="display: flex;justify-content: center;width: 28%;border-radius: 50px;margin: 0 auto;">
-                <div class="user-info">
-                    <img class="rounded-circle mb-3 bg-dark" src="profilePic.jpg" style="width:215px;height:215px;padding:1px;">
-                    <ul class="meta list list-unstyled" style="text-align:center;">
-                        <li class="username my-2">@<?php echo htmlspecialchars($user_name); ?></a></li>
-                        <li class="name"><?php echo $first_name_err." ".$last_name_err; ?>
-                            <label class="label label-info">User</label>
-                        </li>
-                        <li class="email"><?php echo $email_address_err ?></li>
-                        <li class="my-2"><a href="partials/_logout.php"><button class="btn btn-secondary" style="font-size: 15px;padding: 3px 8px;">Logout</button></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="content-panel mb-3" style="display: flex;justify-content: center;">
-                <div class="border p-3" style="border: 2px solid rgba(0, 0, 0, 0.1);border-radius: 1.1rem;background-color: aliceblue;">
-                    <h2 class="title text-center">My Profile</h2>
-                
-                    <form action="partials/_manageProfile.php" method="post">
-                        <div class="form-group">
-                            <b><label for="username">Username:</label></b>
-                            <input class="form-control" id="username" name="username" type="text" disabled value="<?php echo htmlspecialchars($user_name); ?>">
-                        </div>
-                        <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <b><label for="firstName">First Name:</label></b>
-                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required value="<?php echo $firstName ?>">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <b><label for="lastName">Last Name:</label></b>
-                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name" required value="<?php echo $lastName ?>">
-                        </div>
-                        </div>
-                        <div class="form-group">
-                            <b><label for="email">Email:</label></b>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email" required value="<?php echo $email ?>">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group  col-md-6">
-                                <b><label for="phone">Phone No:</label></b>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon">+63</span>
-                                    </div>
-                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Your Phone Number" required pattern="[0-9]{10}" maxlength="10" value="<?php echo $phone ?>">
-                                </div>
-                            </div>
-                            <div class="form-group  col-md-6">
-                                <b><label for="password">Password:</label></b>    
-                                <input class="form-control" id="password" name="password" placeholder="Enter Password" type="password" required minlength="6" maxlength="21" data-toggle="password">
-                            </div>
-                        </div>
-                        <button type="submit" name="updateProfileDetail" class="btn btn-primary">Update</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</body>
-
-</html>
-
-<div class="container">
+<body>
+    <div class="container">
         <h1>User Profile</h1>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
@@ -246,3 +176,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </form>
     </div>
+</body>
+
+</html>
