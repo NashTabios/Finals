@@ -1,3 +1,23 @@
+<?php
+// Check if the user is logged in, then retrieve their username
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    $user_name = $_SESSION["user_name"];
+}
+
+// Logout logic
+if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
+    // Unset all of the session variables
+    $_SESSION = array();
+
+    // Destroy the session.
+    session_destroy();
+
+    // Redirect to index page after logout
+    header("location: index.php");
+    exit;
+}
+?> 
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -16,21 +36,33 @@
         </div>
         <nav class="navbar">
             <div class="logo"> <img src="logo.svg"> </div>
-
+            
+            <?php if (isset($user_name)) : ?>
             <ul class="nav-ul" id="nav_ul">
                 <li>
-                    <a href="#accueil">About</a>
+                    <a href="aboutus.php">About</a>
                 </li>
                 <li>
-                    <a href="#cours">Lorem</a>
+                    <a href="#contact">Contact</a>
                 </li>
                 <li>
-                    <a href="#tutos">Ipsum</a>
-                </li>
-                <li>
-                    <a href="#contact">Lorem</a>
+                    <a href="?logout=1"> Sign Out</a>
                 </li>
             </ul>
+            <?php else : ?>
+            <ul class="nav-ul" id="nav_ul">
+                <li>
+                    <a href="aboutus.php">About</a>
+                </li>
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+                <li>
+                    <a href="login.php">Login</a>
+                </li>
+            </ul>
+            <?php endif; ?>
+            
 
             <div class="hamburger" id="hamburger">
                 <div class="bar1"></div>

@@ -91,6 +91,10 @@ header a {
     list-style: none;
 }
 
+li {
+    padding-right: 10px;
+}
+
 .nav-ul a {
     display: flex;
     align-items: center;

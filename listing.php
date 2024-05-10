@@ -3,6 +3,7 @@ session_start();
 
 // Include config file
 require_once "config.php";
+include 'navbar.php';
 
 // Check if the user is logged in, then retrieve their username
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
@@ -67,11 +68,11 @@ $mysqli->close();
     <div class="container">
         <h1>Welcome to the Listing Page</h1>
         <?php if (isset($user_name)) : ?>
-            <p>Welcome, <?php echo htmlspecialchars($user_name); ?>!</p>
-            <p><a href="createlisting.php">Create Listing</a></p>
-            <p><a href="profile.php">Profile</a></p>
+            <p style="text-align: right;">Welcome, <?php echo htmlspecialchars($user_name); ?>!</p>
+            <p style="text-align: right;"><a href="createlisting.php">Create Listing</a></p>
+            <p style="text-align: right;"><a href="profile.php">Profile</a></p>
         <?php else : ?>
-            <p>Welcome! <a href="login.php">Log in</a> or <a href="register.php">Register</a> to create listings.</p>
+            <p style="text-align: right;">Welcome! <a href="login.php">Log in</a> or <a href="register.php">Register</a> to create listings.</p>
         <?php endif; ?>
 
         <h2>Listings</h2>
