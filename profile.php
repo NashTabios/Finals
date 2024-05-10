@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             var elements = document.getElementsByClassName("editable");
             for (var i = 0; i < elements.length; i++) {
                 elements[i].readOnly = !elements[i].readOnly;
-                elements[i].classList.toggle("form-control-plaintext");
+                elements[i].classList.toggle("form-control");
                 elements[i].classList.toggle("form-control");
             }
             document.getElementById("editButton").classList.toggle("d-none");
@@ -143,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     .container {
         max-width: 1000px;
         margin-top: 75px;
-        background: #fff;
+        background: aliceblue;
         padding: 40px;
         border-radius: 20px; /* Adjust the value to control the curve */
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* Add box shadow */
@@ -152,48 +152,71 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         display: flex; 
         justify-content: center;     
     }
-    
+
+    .user-content{
+        display: flex;
+        justify-content: center;
+        
+    }
+    .user-img{
+        margin-right: 50px;
+        display: flex;
+        align-items: center;
+    }
+    .rounded-circle {
+        border-radius: 50%; 
+        margin-bottom: 1rem; 
+        
+        width: 250px;
+        height: 250px;
+        padding: 1px;
+    }
+    .user-info{
+        border-radius: 20px;
+        background-color: aliceblue;
+        padding: 30px;
+        width: 550px; /* Adjust the width if needed */
+    }
     </style>
 </head>
 
-
-
+<body>
 <div class="container"> 
     <div class="row">
-            <div class="content-panel mb-3" style="display: flex;justify-content: center;">
-                <div class="user-info" style="margin-right:75px;display: flex;align-items: center;">
-                    <img class="rounded-circle mb-3 bg-dark" src="profilePic.jpg" style="width:250px;height:250px;px;padding:1px;">
+            <div class="user-content mb-3">
+                <div class="user-img">
+                    <img class="rounded-circle" src="profilePic.jpg" alt="Profile Picture">
                 </div>
                
-                <div class="border p-3" style="border-radius: 20px; background-color: aliceblue; width: 500px;">
+                <div class="user-info">
                     <h2 class="title text-center">User Profile</h2>
                 
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
                             <b><label for="username">Username:</label></b>
-                            <input type="text" name="user_name" class="form-control" required value="<?php echo htmlspecialchars($user_name); ?>" readonly>
+                            <input type="text" name="user_name" class="form-control" disabled value="<?php echo htmlspecialchars($user_name); ?>" readonly>
                         </div>
                         <div class="form-row">
                         <div class="form-group col-md-6">
                             <b><label for="firstName">First Name:</label></b>
-                            <input type="text" name="first_name" class="form-control" value="<?php echo htmlspecialchars($first_name); ?>" readonly>
+                            <input type="text" name="first_name" class="form-control editable" value="<?php echo htmlspecialchars($first_name); ?>" readonly>
                             <span class="text-danger"><?php echo $first_name_err; ?></span>
                         </div>
                         <div class="form-group col-md-6">
                             <b><label for="lastName">Last Name:</label></b>
-                            <input type="text" name="flast_name" class="form-control" value="<?php echo htmlspecialchars($last_name); ?>" readonly>
+                            <input type="text" name="last_name" class="form-control editable" value="<?php echo htmlspecialchars($last_name); ?>" readonly>
                             <span class="text-danger"><?php echo $last_name_err; ?></span>
                         </div>
                         </div>
                         <div class="form-group">
                             <b><label for="email">Email:</label></b>
-                            <input type="email" name="email_address" class="form-control" value="<?php echo htmlspecialchars($email_address); ?>" readonly>
+                            <input type="email" name="email_address" class="form-control editable" value="<?php echo htmlspecialchars($email_address); ?>" readonly>
                             <span class="text-danger"><?php echo $email_address_err; ?></span>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <b><label>Date of Birth</label></b>
-                                <input type="date" name="dob" class="form-control" value="<?php echo htmlspecialchars($dob); ?>" readonly>
+                                <input type="date" name="dob" class="form-control editable" value="<?php echo htmlspecialchars($dob); ?>" readonly>
                                 <span class="text-danger"><?php echo $dob_err; ?></span>
                             </div>
                         </div>
