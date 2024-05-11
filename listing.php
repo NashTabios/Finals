@@ -27,7 +27,7 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
 $listings = [];
 
 // Retrieve listings from the database
-$sql = "SELECT listing_name, listing_price, listing_desc, listing_image, user_name FROM listing";
+$sql = "SELECT listing_id, listing_name, listing_price, listing_desc, listing_image, user_name FROM listing";
 if ($result = $mysqli->query($sql)) {
     // Fetch result rows as associative array
     while ($row = $result->fetch_assoc()) {
@@ -71,6 +71,7 @@ $mysqli->close();
             <p style="text-align: right;">Welcome, <?php echo htmlspecialchars($user_name); ?>!</p>
             <p style="text-align: right;"><a href="createlisting.php">Create Listing</a></p>
             <p style="text-align: right;"><a href="profile.php">Profile</a></p>
+            <p style="text-align: right;"><a href="userlistings.php">Your Listings</a></p>
         <?php else : ?>
             <p style="text-align: right;">Welcome! <a href="login.php">Log in</a> or <a href="register.php">Register</a> to create listings.</p>
         <?php endif; ?>
@@ -82,7 +83,7 @@ $mysqli->close();
                     <div class="card">
                         <img src="<?php echo htmlspecialchars($listing['listing_image']); ?>" class="card-img-top" alt="Listing Image">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo htmlspecialchars($listing['listing_name']); ?></h5>
+                            <h5 class="card-title"><a href="listingdetails.php?id=<?php echo $listing['listing_id']; ?>"><?php echo htmlspecialchars($listing['listing_name']); ?></a></h5>
                             <p class="card-text"><?php echo htmlspecialchars($listing['listing_desc']); ?></p>
                             <p class="card-text">Price: ₱<?php echo htmlspecialchars($listing['listing_price']); ?></p>
                             <p class="card-text">Uploaded by: <?php echo htmlspecialchars($listing['user_name']); ?></p>

@@ -49,6 +49,22 @@ function deleteListing($listing_id, $mysqli) {
     }
 }
 
+// Function to update listing details
+function updateListing($listing_id, $listing_name, $listing_price, $listing_desc, $listing_image, $mysqli) {
+    $sql = "UPDATE listing SET listing_name = ?, listing_price = ?, listing_desc = ?, listing_image = ? WHERE listing_id = ?";
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param("ssssi", $listing_name, $listing_price, $listing_desc, $listing_image, $listing_id);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+        $stmt->close();
+    } else {
+        return false;
+    }
+}
+
 // Handle user deletion
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_user'])) {
     $user_id = $_POST['delete_user'];
@@ -66,6 +82,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_listing'])) {
         // Redirect to refresh the page after deletion
         header("location: admindashboard.php");
         exit;
+    }
+}
+
+// Handle listing update
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editListingId'])) {
+    $listing_id = $_POST['editListingId'];
+    $listing_name = $_POST['editListingName'];
+    $listing_price = $_POST['editListingPrice'];
+    $listing_desc = $_POST['editListingDesc'];
+
+    // Check if a new image file was uploaded
+    if ($_FILES['editListingImage']['size'] > 0) {
+        $target_dir = "uploads/"; // Directory where the file will be saved
+        $target_file = $target_dir . basename($_FILES['editListingImage']['name']);
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); // Get the file extension
+
+        // Check if the file is an actual image
+        $check = getimagesize($_FILES['editListingImage']['tmp_name']);
+        if($check !== false) {
+            // Allow only certain file formats
+            if($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg" || $imageFileType == "gif") {
+                // Move the uploaded file to the target directory
+                if (move_uploaded_file($_FILES['editListingImage']['tmp_name'], $target_file)) {
+                    $listing_image = $target_file;
+                    // Update listing details in the database
+                    if (updateListing($listing_id, $listing_name, $listing_price, $listing_desc, $listing_image, $mysqli)) {
+                        // Redirect to refresh the page after update
+                        header("location: admindashboard.php");
+                        exit;
+                    } else {
+                        echo "Failed to update listing. Please try again.";
+                    }
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
+                }
+            } else {
+                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            }
+        } else {
+            echo "File is not an image.";
+        }
+    } else {
+        // If no new image was uploaded, update listing details without changing the image
+        $listing_image = $_POST['existingListingImage'];
+        if (updateListing($listing_id, $listing_name, $listing_price, $listing_desc, $listing_image, $mysqli)) {
+            // Redirect to refresh the page after update
+            header("location: admindashboard.php");
+            exit;
+        } else {
+            echo "Failed to update listing. Please try again.";
+        }
     }
 }
 
@@ -234,40 +301,43 @@ $mysqli->close();
         </div>
     </div>
 
+  
     <!-- Edit Listing Modal -->
-    <div class="modal fade" id="editListingModal" tabindex="-1" role="dialog" aria-labelledby="editListingModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editListingModalLabel">Edit Listing</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="editListingForm">
-                        <input type="hidden" id="editListingId" name="editListingId">
-                        <div class="form-group">
-                            <label for="editListingName">Listing Name</label>
-                            <input type="text" class="form-control" id="editListingName" name="editListingName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editListingPrice">Price</label>
-                            <input type="text" class="form-control" id="editListingPrice" name="editListingPrice" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editListingDesc">Description</label>
-                            <textarea class="form-control" id="editListingDesc" name="editListingDesc" rows="3" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="editListingImage">Image URL</label>
-                            <input type="text" class="form-control" id="editListingImage" name="editListingImage" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
-                </div>
+<div class="modal fade" id="editListingModal" tabindex="-1" role="dialog" aria-labelledby="editListingModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editListingModalLabel">Edit Listing</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editListingForm" enctype="multipart/form-data"> <!-- Add enctype attribute for file upload -->
+                    <input type="hidden" id="editListingId" name="editListingId">
+                    <div class="form-group">
+                        <label for="editListingName">Listing Name</label>
+                        <input type="text" class="form-control" id="editListingName" name="editListingName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editListingPrice">Price</label>
+                        <input type="text" class="form-control" id="editListingPrice" name="editListingPrice" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editListingDesc">Description</label>
+                        <textarea class="form-control" id="editListingDesc" name="editListingDesc" rows="3" required></textarea>
+                    </div>
+                    <!-- Replace text input with file input for image upload -->
+                    <div class="form-group">
+                        <label for="editListingImage">Upload Image</label>
+                        <input type="file" class="form-control-file" id="editListingImage" name="editListingImage" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
             </div>
         </div>
+    </div>
+</div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -311,7 +381,8 @@ $mysqli->close();
                         $('#editListingName').val(response.listing_name);
                         $('#editListingPrice').val(response.listing_price);
                         $('#editListingDesc').val(response.listing_desc);
-                        $('#editListingImage').val(response.listing_image);
+                        // For security reasons, you can't pre-fill the file input value
+                        //$('#editListingImage').val(response.listing_image);
                     }
                 });
             });
