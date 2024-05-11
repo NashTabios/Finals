@@ -1,6 +1,7 @@
 <?php
 // Include config file
 require_once "config.php";
+include 'navbar.php';
 
 // Define variables and initialize with empty values
 $email_address = $user_name = $first_name = $last_name = $dob = $pass = "";
@@ -60,48 +61,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REPS - Register</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="register.css">
 
 
 </head>
 
 <body>
-    <h1>Register</h1>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="form-group">
-            <label>Email Address</label>
-            <input type="text" name="email_address" class="form-control <?php echo (!empty($email_address_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email_address; ?>">
-            <span class="invalid-feedback"><?php echo $email_address_err; ?></span>
+    <div class="container">
+        <div class="form-container">
+                <h1>Sign up</h1>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="text" name="email_address" class="form-control <?php echo (!empty($email_address_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email_address; ?>">
+                    <span class="invalid-feedback"><?php echo $email_address_err; ?></span>
+                </div>
+                <div class="form-group">
+                    <label>User Name</label>
+                    <input type="text" name="user_name" class="form-control <?php echo (!empty($user_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $user_name; ?>">
+                    <span class="invalid-feedback"><?php echo $user_name_err; ?></span>
+                </div>
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" class="form-control <?php echo (!empty($first_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $first_name; ?>">
+                    <span class="invalid-feedback"><?php echo $first_name_err; ?></span>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" class="form-control <?php echo (!empty($last_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $last_name; ?>">
+                    <span class="invalid-feedback"><?php echo $last_name_err; ?></span>
+                </div>
+                <div class="form-group">
+                    <label>Birthday</label>
+                    <input type="date" name="dob" class="form-control <?php echo (!empty($dob_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $dob; ?>">
+                    <span class="invalid-feedback"><?php echo $dob_err; ?></span>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="pass" class="form-control <?php echo (!empty($pass_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $pass; ?>">
+                    <span class="invalid-feedback"><?php echo $pass_err; ?></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label>User Name</label>
-            <input type="text" name="user_name" class="form-control <?php echo (!empty($user_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $user_name; ?>">
-            <span class="invalid-feedback"><?php echo $user_name_err; ?></span>
-        </div>
-        <div class="form-group">
-            <label>First Name</label>
-            <input type="text" name="first_name" class="form-control <?php echo (!empty($first_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $first_name; ?>">
-            <span class="invalid-feedback"><?php echo $first_name_err; ?></span>
-        </div>
-        <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" name="last_name" class="form-control <?php echo (!empty($last_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $last_name; ?>">
-            <span class="invalid-feedback"><?php echo $last_name_err; ?></span>
-        </div>
-        <div class="form-group">
-            <label>Birthday</label>
-            <input type="date" name="dob" class="form-control <?php echo (!empty($dob_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $dob; ?>">
-            <span class="invalid-feedback"><?php echo $dob_err; ?></span>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="pass" class="form-control <?php echo (!empty($pass_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $pass; ?>">
-            <span class="invalid-feedback"><?php echo $pass_err; ?></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Submit">
-            <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
-        </div>
-    </form>
+    </div>
+    
 </body>
 
 </html>
