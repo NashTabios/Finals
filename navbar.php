@@ -74,9 +74,9 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
 
     <h1>dont touch</h1>
 
-    <footer id="footer">
+    <!-- <footer id="footer">
         <p>lorem</p>
-    </footer>
+    </footer> -->
 
     <script>
         hamburger.onclick = () => {
