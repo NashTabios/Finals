@@ -70,6 +70,7 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
                 <div class="bar3"></div>
             </div>
         </nav>
+        <nav class="navbar2"> </nav>
     </header>
 
 
