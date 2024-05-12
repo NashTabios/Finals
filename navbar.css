@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Kanit', sans-serif;
 }
 
 html {
@@ -19,7 +19,7 @@ body {
 /**Header NavBar**/
 
 header {
-    background-color: #009506;
+    background-color: #5bff60;
     height: 60px;
     width: 100%;
     position: sticky;
@@ -30,7 +30,7 @@ header {
 }
 
 .shadowHeader {
-    box-shadow: 1px 8px 7px 2px #ff51002b;
+    box-shadow: 1px 8px 7px 2px #4cff492b;
 }
 
 header a {
@@ -47,8 +47,8 @@ header a {
 .progressBar {
     height: 100%;
     width: 0%;
-    background-color: rgb(192, 127, 6);
-    transition: all 0.5s;
+    background-color: rgb(37, 78, 37);
+    transition: all 0.2s;
 }
 
 /**NAVBAR**/
@@ -81,7 +81,7 @@ header a {
 }
 
 .logo a:hover {
-    color: rgb(192, 127, 6);
+    color: rgb(157, 215, 157);
 }
 
 .nav-ul {
@@ -106,9 +106,9 @@ li {
 }
 
 .nav-ul a:hover {
-    background-color: rgba(192, 127, 6, 0.4);
-    border-radius: 5px;
-    animation: flou 0.5s;
+    background-color: rgba(157, 215, 157);
+    border-radius: 2px;
+    animation: flou 0.8s;
 }
 
 @keyframes flou {
@@ -129,6 +129,7 @@ h1 {
     text-align: center;
     font-style: bold;
     color: #ffffff;
+    
 }
 
 article {
@@ -194,7 +195,7 @@ footer {
 }
 
 .open .bar1, .open .bar2, .open .bar3 {
-    background-color: rgb(192, 127, 6);
+    background-color: rgb(64, 148, 64);
 }
 
 .open .bar1 {
@@ -237,10 +238,10 @@ footer {
         justify-content: left;
         padding-left: 5px;
         width: 50%;
-        border-bottom: 1px solid rgba(192, 127, 6, 0.2);
+        border-bottom: 1px solid rgb(145, 211, 145);
     }
     .nav-ul a:hover {
-        border-radius: 0;
+        border-radius: 1;
         animation: none;
     }
 

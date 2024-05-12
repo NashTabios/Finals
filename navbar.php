@@ -72,7 +72,6 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
         </nav>
     </header>
 
-    <!-- <h1>dont touch</h1> -->
 
     <!-- <footer id="footer">
         <p>lorem</p>
