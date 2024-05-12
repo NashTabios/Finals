@@ -18,6 +18,7 @@
     <p><a href="login.php">login</a></p>
     <p><a href="register.php">signup</a></p>
     <p><a href="aboutus.php">about us</a></p>
+    <p><a href="adminlogin.php">aDMIN</a></p>
 </body>
 
 </html>
