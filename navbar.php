@@ -35,7 +35,7 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
             <div class="progressBar" id="progressBar"></div>
         </div>
         <nav class="navbar">
-            <div class="logo"> <img src="logo.svg"> </div>
+            <div class="logo"> <img src="navlogo2.png"> </div>
             
             <?php if (isset($user_name)) : ?>
             <ul class="nav-ul" id="nav_ul">
@@ -72,7 +72,7 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
         </nav>
     </header>
 
-    <h1>dont touch</h1>
+    <!-- <h1>dont touch</h1> -->
 
     <!-- <footer id="footer">
         <p>lorem</p>
