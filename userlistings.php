@@ -53,6 +53,66 @@ if ($stmt = $mysqli->prepare($sql)) {
     $stmt->close();
 }
 
+// Check if form data has been submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check if the form submission is for updating a listing
+    if (isset($_POST["edit_listing_name"]) && isset($_POST["edit_listing_price"]) && isset($_POST["edit_listing_desc"]) && isset($_POST["listing_id"])) {
+        // Get the form data
+        $listing_id = $_POST["listing_id"];
+        $edit_listing_name = $_POST["edit_listing_name"];
+        $edit_listing_price = $_POST["edit_listing_price"];
+        $edit_listing_desc = $_POST["edit_listing_desc"];
+
+        // Check if a new image file has been uploaded
+        if (!empty($_FILES["edit_listing_image"]["name"])) {
+            // Process the uploaded image file
+            $target_dir = "uploads/";
+            $target_file = $target_dir . basename($_FILES["edit_listing_image"]["name"]);
+            if (move_uploaded_file($_FILES["edit_listing_image"]["tmp_name"], $target_file)) {
+                // Update the listing in the database with the new image file path
+                $sql = "UPDATE listing SET listing_name=?, listing_price=?, listing_desc=?, listing_image=? WHERE listing_id=? AND user_name=?";
+                if ($stmt = $mysqli->prepare($sql)) {
+                    // Bind variables to the prepared statement as parameters
+                    $stmt->bind_param("ssssss", $edit_listing_name, $edit_listing_price, $edit_listing_desc, $target_file, $listing_id, $_SESSION["user_name"]);
+
+                    // Attempt to execute the prepared statement
+                    if ($stmt->execute()) {
+                        // Redirect to the same page to reflect the changes
+                        header("location: userlistings.php");
+                        exit;
+                    } else {
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
+
+                    // Close statement
+                    $stmt->close();
+                }
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        } else {
+            // Update the listing in the database without changing the image file path
+            $sql = "UPDATE listing SET listing_name=?, listing_price=?, listing_desc=? WHERE listing_id=? AND user_name=?";
+            if ($stmt = $mysqli->prepare($sql)) {
+                // Bind variables to the prepared statement as parameters
+                $stmt->bind_param("sssss", $edit_listing_name, $edit_listing_price, $edit_listing_desc, $listing_id, $_SESSION["user_name"]);
+
+                // Attempt to execute the prepared statement
+                if ($stmt->execute()) {
+                    // Redirect to the same page to reflect the changes
+                    header("location: userlistings.php");
+                    exit;
+                } else {
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+
+                // Close statement
+                $stmt->close();
+            }
+        }
+    }
+}
+
 // Close connection
 $mysqli->close();
 ?>
@@ -115,7 +175,7 @@ $mysqli->close();
                                 </div>
                                 <div class="modal-body">
                                     <!-- Form for editing the listing -->
-                                    <form id="editForm_<?php echo $listing['listing_id']; ?>" action="userlistings.php" method="POST">
+                                    <form id="editForm_<?php echo $listing['listing_id']; ?>" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
                                         <input type="hidden" name="listing_id" value="<?php echo $listing['listing_id']; ?>">
                                         <!-- Add your form fields here -->
                                         <div class="form-group">
@@ -130,7 +190,11 @@ $mysqli->close();
                                             <label for="edit_listing_desc_<?php echo $listing['listing_id']; ?>">Listing Description</label>
                                             <textarea class="form-control" id="edit_listing_desc_<?php echo $listing['listing_id']; ?>" name="edit_listing_desc"><?php echo htmlspecialchars($listing['listing_desc']); ?></textarea>
                                         </div>
-                                        <button type="button" class="btn btn-primary" onclick="submitForm(<?php echo $listing['listing_id']; ?>)">Save Changes</button>
+                                        <div class="form-group">
+                                            <label for="edit_listing_image_<?php echo $listing['listing_id']; ?>">Upload Image</label>
+                                            <input type="file" class="form-control-file" id="edit_listing_image_<?php echo $listing['listing_id']; ?>" name="edit_listing_image" accept="image/*">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
                                     </form>
                                 </div>
                             </div>
@@ -144,12 +208,6 @@ $mysqli->close();
     <!-- Bootstrap JS and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function submitForm(listing_id) {
-            // Submit the form with the specified listing_id
-            $('#editForm_' + listing_id).submit();
-        }
-    </script>
 </body>
 
 </html>
