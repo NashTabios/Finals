@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2024 at 09:58 AM
+-- Generation Time: May 13, 2024 at 11:02 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `reps`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `admin_id` int(11) NOT NULL,
+  `admin_email` varchar(255) NOT NULL,
+  `admin_pass` varchar(255) NOT NULL,
+  `admin_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`admin_id`, `admin_email`, `admin_pass`, `admin_name`) VALUES
+(1, 'repsadmin@reps.com', 'reps2023', 'REPS-ADMIN');
 
 -- --------------------------------------------------------
 
@@ -41,9 +61,7 @@ CREATE TABLE `listing` (
 --
 
 INSERT INTO `listing` (`listing_id`, `listing_name`, `listing_price`, `listing_desc`, `listing_image`, `user_name`) VALUES
-(1, 'Tender Juicy', 200, 'adada', 'uploads/haha.jpg', 'kmocorro24'),
 (2, 'Tender Juicy', 200, 'haha', 'uploads/haha.jpg', 'kmocorro24'),
-(3, 'kenn', 2147483647, 'masyadong pogi kaya ibebenta ko na', 'uploads/436733367_399842039625877_7524423132831593595_n.jpg', 'kmocorro24'),
 (4, 'steph curry', 2001, 'im steph curry testing', 'uploads/steph.jpg', 'stephcurry30');
 
 -- --------------------------------------------------------
@@ -59,23 +77,29 @@ CREATE TABLE `users` (
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `dob` date NOT NULL,
-  `pass` varchar(255) NOT NULL
+  `pass` varchar(255) NOT NULL,
+  `profile_picture` varchar(255) NOT NULL,
+  `user_add` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email_address`, `user_name`, `first_name`, `last_name`, `dob`, `pass`) VALUES
-(9, 'testing@google.com', 'testing1', 'Testig', 'Lang', '2024-03-31', 'testing'),
-(10, 'kennmarton.mocorro.cics@ust.edu.ph', 'kmocorro24', 'kenn', 'mocorro', '2024-04-01', 'kenken'),
-(11, 'kenn@gmail.com', 'kmocorro24', 'Kenn', 'Marton', '2025-01-01', 'notram'),
-(12, 'lebron@gmail.com', 'lbj', 'rasc', 'binuya', '2024-01-21', 'lebronjames'),
-(13, 'steph.curry@gmail.com', 'stephcurry30', 'Stephen', 'Curry', '2016-01-04', 'stephcurry');
+INSERT INTO `users` (`id`, `email_address`, `user_name`, `first_name`, `last_name`, `dob`, `pass`, `profile_picture`, `user_add`) VALUES
+(10, 'kennmarton.mocorro.cics@ust.edu.ph', 'kmocorro24', 'Kenn Marton', 'Mocorro', '2003-06-24', 'kenken', 'uploads/440488877_318802917732416_6602748213895101957_n.jpg', 'Eastwood City, Brgy. Bagumbayan Quezon City'),
+(12, 'lebron@gmail.com', 'lbj', 'LeBron Jr.', 'James', '2023-12-31', 'lebronjames', '', ''),
+(13, 'steph.curry@gmail.com', 'stephcurry30', 'Stephen', 'Curry', '2016-01-04', 'stephcurry', '', '');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`admin_id`);
 
 --
 -- Indexes for table `listing`
@@ -92,6 +116,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `listing`
