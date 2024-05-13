@@ -1,7 +1,6 @@
 <?php
 // Include config file
 require_once "config.php";
-include 'navbar.php';
 
 // Define variables and initialize with empty values
 $email_address = $user_name = $first_name = $last_name = $dob = $pass = "";
@@ -59,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REPS - Register</title>
+    <title>Sign up - R.E.P.S</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="register.css">
 
@@ -67,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <?php include 'navbar.php'; ?>
     <div class="container">
         <div class="form-container">
                 <h1>Sign up</h1>

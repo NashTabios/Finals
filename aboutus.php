@@ -1,13 +1,13 @@
-<?php include 'navbar.php'?>
 <html>
     <head>
-        <title>About Us Section</title>
+        <title>About Us - R.E.P.S</title>
         <meta charset="utf-8">
         <meta name="viewport" ccontent="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type ="text/css" href="abtsstyle.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" >
     </head>
     <body>
+        <?php include 'navbar.php'; ?>
         <section>
             <div class="about-us">
                 <h1>About Us</h1>
