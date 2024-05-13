@@ -40,6 +40,9 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
             <?php if (isset($user_name)) : ?>
             <ul class="nav-ul" id="nav_ul">
                 <li>
+                    <a href="index.php">Home</a>
+                </li>
+                <li>
                     <a href="aboutus.php">About</a>
                 </li>
                 <li>
@@ -51,6 +54,9 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
             </ul>
             <?php else : ?>
             <ul class="nav-ul" id="nav_ul">
+                <li>
+                    <a href="index.php">Home</a>
+                </li>
                 <li>
                     <a href="aboutus.php">About</a>
                 </li>
@@ -70,7 +76,6 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
                 <div class="bar3"></div>
             </div>
         </nav>
-        <nav class="navbar2"> </nav>
     </header>
 
 
