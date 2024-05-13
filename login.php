@@ -102,12 +102,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
                 <label for="email_address">Email Address</label>
-                <input type="text" id="email_address" name="email_address" class="form-control <?php echo (!empty($email_address_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email_address; ?>">
+                <input type="text" id="email_address" name="email_address" class="form-control
+                <?php echo (!empty($email_address_err)) ? 'is-invalid' : ''; ?>"
+                value="<?php echo $email_address; ?>" placeholder="Enter your Email">
                 <span class="invalid-feedback"><?php echo $email_address_err; ?></span>
+                
             </div>
             <div class="form-group">
                 <label for="pass">Password</label>
-                <input type="password" id="pass" name="pass" class="form-control <?php echo (!empty($pass_err)) ? 'is-invalid' : ''; ?>">
+                <input type="password" id="pass" name="pass" class="form-control
+                <?php echo (!empty($pass_err)) ? 'is-invalid' : ''; ?>" placeholder="Enter your Password">
                 <span class="invalid-feedback"><?php echo $pass_err; ?></span>
             </div>
             <div class="form-group">
