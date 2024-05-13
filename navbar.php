@@ -69,7 +69,6 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
             </ul>
             <?php endif; ?>
             
-
             <div class="hamburger" id="hamburger">
                 <div class="bar1"></div>
                 <div class="bar2"></div>
