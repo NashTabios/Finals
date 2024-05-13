@@ -3,7 +3,6 @@ session_start();
 
 // Include config file
 require_once "config.php";
-include 'navbar.php';
 
 // Define variables and initialize with empty values
 $email_address = $pass = "";
@@ -96,6 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <?php include 'navbar.php'; ?>
     <div class="login-container">
         <h2>Sign In</h2>
         <p>Please fill in your credentials to login.</p>

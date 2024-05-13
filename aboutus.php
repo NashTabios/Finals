@@ -1,3 +1,4 @@
+<?php include 'navbar.php'?>
 <html>
     <head>
         <title>About Us Section</title>
