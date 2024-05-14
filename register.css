@@ -169,4 +169,39 @@ input:valid + .label{
     padding: 10px 50px;
     cursor: pointer;
     border-radius: 5px;
-}  
+} 
+@media only screen and (max-width: 768px) {
+    html, body{
+        overflow: auto;
+    }
+    .container {
+      flex-direction: column;
+    }
+  
+    .formcontainert, .form-container {
+      width: 90%;
+    }
+  
+    .form-container form .userdetails .form-group, 
+    .form-container form .userdetails .bdform {
+      width: 100%;
+    }
+  
+    .btn {
+      width: 100%;
+      padding-left: 18%;
+    }
+  
+    .image-section {
+      width: 70px; /* Adjust the image width for smaller screens */
+    }
+  
+    .formcontainert h1 {
+      font-size: 30px; /* Adjust the font size for smaller screens */
+    }
+  
+    .formcontainert h3 {
+      font-size: 24px; /* Adjust the font size for smaller screens */
+    }
+  }
+  
