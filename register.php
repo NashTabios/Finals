@@ -1,6 +1,7 @@
 <?php
 // Include config file
 require_once "config.php";
+include 'navbar.php';
 
 // Define variables and initialize with empty values
 $email_address = $user_name = $first_name = $last_name = $dob = $pass = "";
@@ -58,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up - R.E.P.S</title>
+    <title>REPS - Register</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="register.css">
 
@@ -66,42 +67,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <?php include 'navbar.php'; ?>
     <div class="container">
+        <div class="formcontainert">
+                <div class="image-section">
+                    <img src="logo.png">
+                </div>
+            <h1>Welcome to REPS!</h1>
+            <h3><center>"Recycle, Revitalize, Reshape Redefining Consumption for a Brighter Tomorrow!"</center></h3>
+            <p></p>
+        </div>
         <div class="form-container">
-                <h1>Sign up</h1>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <div class="userdetails">
-                    <div class="form-group">
-                        <input type="text" name="email_address" class="form-control <?php echo (!empty($email_address_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email_address; ?>">
-                        <div class="label">Enter your email address</div>
+            
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <h1>Sign up</h1>
+                    <div class="userdetails">
+                        <div class="form-group">
+                            <input type="text" name="first_name" class="form-control <?php echo (!empty($first_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $first_name; ?>">
+                            <div class="label">First name</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="last_name" class="form-control <?php echo (!empty($last_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $last_name; ?>">
+                            <div class="label">Last name</div>
+                        </div>
+                        <div class="bdform">
+                            <input type="date" name="dob" class="form-control <?php echo (!empty($dob_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $dob; ?>">
+                            <div class="label">Birthdate</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="email_address" class="form-control <?php echo (!empty($email_address_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email_address; ?>">
+                            <div class="label">Email address</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="user_name" class="form-control <?php echo (!empty($user__name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $user_name; ?>">
+                            <div class="label">Username</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="pass" class="form-control <?php echo (!empty($pass_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $pass; ?>">
+                            <div class="label">New password</div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="text" name="user_name" class="form-control <?php echo (!empty($user__name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $user_name; ?>">
-                        <div class="label">Enter your username</div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="first_name" class="form-control <?php echo (!empty($first_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $first_name; ?>">
-                        <div class="label">Enter your first name</div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="last_name" class="form-control <?php echo (!empty($last_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $last_name; ?>">
-                        <div class="label">Enter your last name</div>
-                    </div>
-                    <div class="bdform">
-                        <input type="date" name="dob" class="form-control <?php echo (!empty($dob_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $dob; ?>">
-                        <div class="label">Enter your birthdate</div>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="pass" class="form-control <?php echo (!empty($pass_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $pass; ?>">
-                        <div class="label">Enter your new password</div>
-                    </div>
-                    <div class="bdform">
+                    <div class="btn">
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
                     </div>
-                </div>
-            </form>
+                </form>
         </div>
     </div>
     

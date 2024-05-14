@@ -3,7 +3,7 @@
         <title>About Us - R.E.P.S</title>
         <meta charset="utf-8">
         <meta name="viewport" ccontent="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type ="text/css" href="abtsstyle.css">
+        <link rel="stylesheet" type ="text/css" href="aboutus.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" >
     </head>
     <body>

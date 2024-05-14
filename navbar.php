@@ -35,8 +35,9 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
             <div class="progressBar" id="progressBar"></div>
         </div>
         <nav class="navbar">
-            <div class="logo"> <img src="navlogo2.png"> </div>
-            
+            <a href="index.php">
+                <div class="logo"> <img src="navlogo2.png"> </div>
+            </a>
             <?php if (isset($user_name)) : ?>
             <ul class="nav-ul" id="nav_ul">
                 <li>
