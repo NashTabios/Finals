@@ -15,8 +15,10 @@
     margin-top: 10px;
 }
 
-.login-card button {
-    cursor: pointer;
+.login-card a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
 }
 
 .normal-signin,

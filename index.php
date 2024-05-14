@@ -10,20 +10,21 @@
 </head>
 
 <body>
-
-    <header>
+<header>
         <nav class="navbar">
             <div class="container">
-    <script src="index.js"></script>
-</body>
+</div>
+</nav>
+</header>
 <div class="login-card">
-
-<button class="normal-signin"><a href="login.php">login</a></button>
-<div class="instruction-text">Don't have an Account?</div>
-<button class="create-account"><a href="register.php">Create Account</a></button>
+        <a href="login.php" class="normal-signin">login</a>
+        <div class="instruction-text">Don't have an Account?</div>
+        <a href="register.php" class="create-account">Create Account</a>
     <p><a href="aboutus.php">about us</a></p>
     <p><a href="adminlogin.php">aDMIN</a></p>
 </div>
+<script src="index.js"></script>
+
 </body>
 
 </html>
