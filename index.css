@@ -1,23 +1,47 @@
-.body{
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: auto;
-    margin: 20px;
-    padding: 0;
-    background: url(.jpg) no-repeat;
+    background-image: url('registerbg.svg'); /* Set the background image */
     background-size: cover;
-    font-family: 'Open Sans', sans-serif;
+    background-repeat: no-repeat;
+    font-family: 'Poppins', Arial, sans-serif;
 }
+
+.cardContainer {
+    width: fit-content;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 .login-card {
-    width: 250px;
-    height: 240px;
-    background-color: #f2f2f2;
-    border-radius: 25px;
-    box-shadow: 2px 2px 15px rgb(193, 193, 193);
-    margin: auto; /* Center the card */
-    margin-top: 50px; /* Adjust as needed */
+    width: 220px;
+    padding: 20px 10px;
+    border-radius: 10px;
+    backdrop-filter: blur(30px);
+    background-color: rgba(65, 65, 65, 0.308);
+    border: 1px solid rgba(255, 255, 255, 0.089);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .instruction-text {
@@ -31,6 +55,7 @@
     display: block;
     text-decoration: none;
     color: inherit;
+    width: 100%;
 }
 
 .normal-signin,
@@ -38,14 +63,12 @@
     padding: 10px;
     font-size: 17px;
     width: 70%;
-    margin: 5px auto; /* Center the buttons horizontally */
-    display: block; /* Ensure each button occupies full width */
+    margin: 5px auto;
     border: 2px solid transparent;
     border-radius: 5em;
     font-weight: bold;
-    font-family: sans-serif;
     transition: 0.2s;
-    text-align: center; /* Center the text */
+    text-align: center;
 }
 
 .normal-signin {
@@ -69,3 +92,22 @@
     color: #1b77da;
     border: 2px solid #1b77da;
 }
+
+
+.cardContainer::before {
+    width: 100px;
+    height: 100px;
+    content: "";
+    position: absolute;
+    background-color: rgb(144, 161, 255);
+    z-index: -1;
+    border-radius: 50%;
+    left: 100px;
+    top: 50px;
+    transition: all 1s;
+  }
+  
+  .cardContainer:hover::before {
+    transform: translate(-50px, 50px);
+  }
+  
