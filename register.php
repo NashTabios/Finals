@@ -69,12 +69,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
         <div class="formcontainert">
-            <h1></h1>
+                <div class="image-section">
+                    <img src="logo.png">
+                </div>
+            <h1>Welcome to REPS!</h1>
+            <h3><center>"Recycle, Revitalize, Reshape Redefining Consumption for a Brighter Tomorrow!"</center></h3>
             <p></p>
         </div>
         <div class="form-container">
-            <h1>Sign up</h1>
+            
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <h1>Sign up</h1>
                     <div class="userdetails">
                         <div class="form-group">
                             <input type="text" name="first_name" class="form-control <?php echo (!empty($first_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $first_name; ?>">
