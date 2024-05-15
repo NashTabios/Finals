@@ -123,9 +123,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background: white;
             padding: 40px;
             border-radius: 20px;
-            /* Adjust the value to control the curve */
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-            /* Add box shadow */
+    
         }
 
         .row {
@@ -156,7 +155,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background-color: white;
             padding: 30px;
             width: 550px;
-            /* Adjust the width if needed */
         }
     </style>
 </head>
@@ -170,7 +168,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <div class="listing-info">
-                <h2>Create Listing</h2>
+                <h2 class="title text-center">Create Listing</h2>
+                <br>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label>Listing Name</label>
