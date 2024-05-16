@@ -101,6 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    
+
     // Close connection
     $mysqli->close();
 }
@@ -114,38 +116,104 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Listing</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            max-width: 1100px;
+            margin-top: 75px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .listing-content {
+            display: flex;
+            justify-content: center;
+        }
+
+        .listing-img {
+            margin-right: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .product_image {
+            margin-bottom: 1rem;
+            width: 350px;
+            height: 350px;
+            padding: 1px;
+        }
+
+        .listing-info {
+            border-radius: 20px;
+            background-color: white;
+            padding: 30px;
+            width: 550px;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <h2>Create Listing</h2>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label>Listing Name</label>
-                <input type="text" name="listing_name" class="form-control <?php echo (!empty($listing_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $listing_name; ?>">
-                <span class="invalid-feedback"><?php echo $listing_name_err; ?></span>
+    <div class="row">
+            <div class="listing-content mb-3">
+                <div class="listing-img">
+                    <img class="product_image" src="" alt="Listing Image">
+                </div>
+
+                <div class="listing-info">
+                <h2 class="title text-center">Create Listing</h2>
+                <br>
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Listing Name</label>
+                        <input type="text" name="listing_name" class="form-control <?php echo (!empty($listing_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $listing_name; ?>">
+                        <span class="invalid-feedback"><?php echo $listing_name_err; ?></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Listing Price</label>
+                        <input type="text" name="listing_price" class="form-control <?php echo (!empty($listing_price_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $listing_price; ?>">
+                        <span class="invalid-feedback"><?php echo $listing_price_err; ?></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Listing Description</label>
+                        <textarea name="listing_desc" class="form-control <?php echo (!empty($listing_desc_err)) ? 'is-invalid' : ''; ?>"><?php echo $listing_desc; ?></textarea>
+                        <span class="invalid-feedback"><?php echo $listing_desc_err; ?></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Listing Image</label>
+                        <input type="file" name="listing_image" class="form-control-file <?php echo (!empty($listing_image_err)) ? 'is-invalid' : ''; ?>">
+                        <span class="invalid-feedback"><?php echo $listing_image_err; ?></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Submit" name="submit">
+                        <a href="listing.php" class="btn btn-secondary ml-2">Cancel</a>
+                    </div>
+                </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Listing Price</label>
-                <input type="text" name="listing_price" class="form-control <?php echo (!empty($listing_price_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $listing_price; ?>">
-                <span class="invalid-feedback"><?php echo $listing_price_err; ?></span>
-            </div>
-            <div class="form-group">
-                <label>Listing Description</label>
-                <textarea name="listing_desc" class="form-control <?php echo (!empty($listing_desc_err)) ? 'is-invalid' : ''; ?>"><?php echo $listing_desc; ?></textarea>
-                <span class="invalid-feedback"><?php echo $listing_desc_err; ?></span>
-            </div>
-            <div class="form-group">
-                <label>Listing Image</label>
-                <input type="file" name="listing_image" class="form-control-file <?php echo (!empty($listing_image_err)) ? 'is-invalid' : ''; ?>">
-                <span class="invalid-feedback"><?php echo $listing_image_err; ?></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit" name="submit">
-                <a href="listing.php" class="btn btn-secondary ml-2">Cancel</a>
-            </div>
-        </form>
+    </div>
     </div>
 </body>
+<script>
+  const listingImageInput = document.querySelector('input[type="file"]');
+  const productImage = document.querySelector('.product_image');
 
+  listingImageInput.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+      productImage.src = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  });
+</script>
 </html>

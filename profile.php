@@ -184,12 +184,12 @@ $mysqli->close();
         .container {
             max-width: 1000px;
             margin-top: 75px;
+            margin-bottom:75px;
             background: aliceblue;
             padding: 40px;
             border-radius: 20px;
-            /* Adjust the value to control the curve */
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-            /* Add box shadow */
+            
         }
 
         .row {
@@ -221,7 +221,6 @@ $mysqli->close();
             background-color: aliceblue;
             padding: 30px;
             width: 550px;
-            /* Adjust the width if needed */
         }
     </style>
 </head>
@@ -236,6 +235,7 @@ $mysqli->close();
 
                 <div class="user-info">
                     <h2 class="title text-center">User Profile</h2>
+                    <br>
 
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                         <div class="form-group">
