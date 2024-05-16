@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="index.css">
 
 <body>
+<?php include 'navbar.php'; ?>
 <div class="cardContainer">
 <div class="login-card">
-        <a href="login.php" class="normal-signin">login</a>
+        <a href="login.php" class="normal-signin">Login</a>
         <div class="instruction-text">Don't have an Account?</div>
         <a href="register.php" class="create-account">Create Account</a>
     <p><a href="aboutus.php">about us</a></p>

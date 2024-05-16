@@ -14,16 +14,15 @@ html, body {
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-image: url('registerbg.svg'); /* Set the background image */
-    background-size: cover;
+    background-size: auto;
     background-repeat: no-repeat;
+    background-position: center;
     font-family: 'Poppins', Arial, sans-serif;
 }
 
 .cardContainer {
+    display: flex;
     width: fit-content;
     position: relative;
     display: flex;
@@ -72,25 +71,28 @@ body {
 }
 
 .normal-signin {
-    background-color: #1b77da;
-    color: #f2f2f2;
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745; /* Change the background color */
+    border-color: #28a745; /* Change the border color */
+    color: #fff; /* Change the text color */
 }
 
 .normal-signin:hover {
     background-color: transparent;
-    color: #1b77da;
-    border: 2px solid #1b77da;
+    color: #218838;
+    border: 2px solid #218838;
 }
 
 .create-account {
     background-color: #e8e8e8;
-    color: #1b77da;
+    color: #218838;
 }
 
 .create-account:hover {
     background-color: transparent;
-    color: #1b77da;
-    border: 2px solid #1b77da;
+    color: #218838;
+    border: 2px solid #218838;
 }
 
 
