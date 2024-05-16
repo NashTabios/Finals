@@ -1,5 +1,5 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sanchez:ital@0;1&family=Tangerine:wght@400;700&display=swap');
 
 /* Reset default margin and padding */
 * {
@@ -22,164 +22,30 @@ body {
     font-family: Arial, sans-serif, 'Poppins', 'Tangerine', 'Sanchez';
 }
 
+
+.content-wrapper {
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
 /* Centered logo styles */
 .centered-logo {
     position: absolute;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    padding-left: 20px; /* Adjust as needed */
+    padding-left: 80px; /* Adjust as needed */
 }
 
 .centered-logo img {
-    height: 300px; /* Adjust the size as needed */
+    height: 280px; /* Adjust the size as needed */
     width: auto;
-}
-
-/* Navbar and other styles */
-.progressBar-container {
-    width: 100%;
-    height: 4px;
-    background-color: #777777;
-}
-
-.progressBar {
-    height: 100%;
-    width: 0%;
-    background-color: rgb(37, 78, 37);
-    transition: all 0.2s;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-    width: 100%;
-    background-color: #009506;
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
-
-.nav-ul {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    justify-content: flex-end; /* Aligns items to the right */
-
-}
-
-li {
-    padding-right: 10px;
-}
-
-.nav-ul a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 56px;
-    width: 100px;
-    font-size: 1.5rem;
-    color: white;
-    text-decoration: none;
-}
-
-.nav-ul a:hover {
-    background-color: rgba(157, 215, 157);
-    border-radius: 2px;
-    animation: flou 0.8s;
-}
-
-@keyframes flou {
-    from {
-        transform: translateX(-20px);
-        filter: blur(2px);
-    }
-    to {
-        transform: translateX(0);
-        filter: blur(0);
-    }
-}
-
-.hamburger {
-    display: none;
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: center;
-    padding: 5px;
-}
-
-.hamburger :first-child {
-    margin-top: 0;
-}
-
-.bar1, .bar2, .bar3 {
-    margin-top: 6px;
-    width: 35px;
-    height: 6px;
-    border-radius: 5px;
-    background-color: white;
-    transition: all 0.7s;
-}
-
-.open .bar1, .open .bar2, .open .bar3 {
-    background-color: rgb(64, 148, 64);
-}
-
-.open .bar1 {
-    transform: translateY(200%) rotate(-45deg);
-}
-
-.open .bar2 {
-    opacity: 0;
-    transform: rotate(45deg);
-}
-
-.open .bar3 {
-    transform: translateY(-200%) rotate(45deg);
-}
-
-.noScroll {
-    overflow: hidden;
-}
-
-@media (max-width: 800px) {
-    .hamburger {
-        display: flex;
-    }
-    .nav-ul {
-        position: fixed;
-        top: 60px;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        flex-direction: column;
-        -webkit-backdrop-filter: blur(4px);
-        backdrop-filter: blur(4px);
-        background-color: rgba(0, 0, 0, 0.4);
-        transition: transform 0.5s ease-out;
-    }
-    .slide {
-        transform: translate(100%);
-    }
-    .nav-ul a {
-        justify-content: left;
-        padding-left: 5px;
-        width: 50%;
-        border-bottom: 1px solid rgb(145, 211, 145);
-    }
-    .nav-ul a:hover {
-        border-radius: 1;
-        animation: none;
-    }
-
-    article p {
-        font-size: 1rem;
-    }
 }
 
 .cardContainer {
@@ -189,7 +55,7 @@ li {
     height: 100%;
     width: 100%;
     padding-right: 20px;
-    transform: translateX(-80px); /* Move 10px to the left */
+    transform: translateX(-100px); /* Move 10px to the left */
 
 }
 
@@ -209,7 +75,7 @@ li {
 .instruction-text {
     color: rgb(150, 150, 150);
     text-align: center;
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 10px;
 }
 
@@ -256,4 +122,39 @@ li {
     background-color: transparent;
     color: #28a745;
     border: 2px solid #28a745;
+}
+
+.separator {
+    width: 50%;
+    margin: 20px auto;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Admin and About Us link container */
+.admin-about-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Vertical Separator styles */
+.vertical-separator {
+    display: inline-block;
+    width: 1px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.3);;
+    margin: 0 10px;
+}
+
+/* Admin and About Us link styles */
+.admin-link, .about-us-link {
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+    display: inline-block;
+    width: auto;
+    text-decoration: none;
+
+.admin-link:hover, .about-us-link:hover {
+    color: #28a745;
 }
