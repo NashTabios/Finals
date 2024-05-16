@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="image-section">
                     <img src="logo.png">
                 </div>
-            <h1>Welcome to REPS!</h1>
+            <h1><center>Welcome to REPS!</center></h1>
             <h3><center>"Recycle, Revitalize, Reshape Redefining Consumption for a Brighter Tomorrow!"</center></h3>
             <p></p>
         </div>
