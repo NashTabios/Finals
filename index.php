@@ -30,7 +30,7 @@
     <div class="container">
       <nav class="navbar">
         <div class="nav-logo">
-          <p>RECYCLING EXCHANGE PLATFORM FOR SUSTAINABILITY</p>
+          <p>EcoMarket</p>
         </div>
         <div class="nav-items">
          <a href="index.php" class="menu-item">Home</a>
@@ -41,8 +41,8 @@
       </nav>
 
       <section class="landing">
-        <h1>first part</h1>
-        <p>lalagay info</p>
+        <h1 class="header">WHERE SUSTAINABILITY MEETS COMMERCE</h1>
+        <p>Recycling Exchange Platform for Sustainability</p>
       </section>
     </div>
 

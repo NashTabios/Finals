@@ -28,21 +28,66 @@ a {
 
 .container {
   height: 100vh;
-  background-color: #101010;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
 }
 
+.header {
+  color: #6e6b6b;
+}
+
 .landing {
-  background-image: url('indexbg.svg');
-  background-size: contain;
+  background-image: url('./imgs/bgsection.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 24px;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
 }
+
+.header {
+  margin-top: -20px;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  animation: fadeInUpScale 1.5s forwards 0.5s;
+}
+
+.landing p {
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+  animation: fadeInUpScale 1.5s forwards 1s;
+  margin-bottom: 200px;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUpScale {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(15px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 section h1 {
   color: #d7d7d7;
   font-size: 64px;
@@ -69,7 +114,7 @@ section p {
   justify-content: space-between;
   align-items: center;
   padding: 35px;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 .navbar .nav-logo {
   font-size: 22px;
