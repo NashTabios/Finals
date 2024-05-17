@@ -124,9 +124,9 @@ $mysqli->close();
                 <h2 class="text-center"><?php echo htmlspecialchars($listing_name); ?></h2>
                 <br>
                 <p><?php echo htmlspecialchars($listing_desc); ?></p>
-                <p>Price: ₱<?php echo htmlspecialchars($listing_price); ?></p>
-                <p>Status: <?php echo htmlspecialchars($status); ?></p>
-                <p>Uploaded by: <?php echo htmlspecialchars($user_name); ?></p>
+                <p><strong>Price: </strong> ₱<?php echo htmlspecialchars($listing_price); ?></p>
+                <p><strong>Status: </strong><?php echo htmlspecialchars($status); ?></p>
+                <p><strong>Uploaded by: </strong><?php echo htmlspecialchars($user_name); ?></p>
             </div>
 
             <div class="box same-height"><!-- box same-height Starts -->
@@ -139,12 +139,12 @@ $mysqli->close();
                     </div>
                 <?php endif; ?>
                     <div class="col-md-8">
-                    <p>User Name: <?php echo htmlspecialchars($user_name); ?></p>
-                    <p>Email Address: <?php echo htmlspecialchars($email_address); ?></p>
-                    <p>Contact Number: <?php echo htmlspecialchars($contact_num); ?></p>
-                    <p>First Name: <?php echo htmlspecialchars($first_name); ?></p>
-                    <p>Last Name: <?php echo htmlspecialchars($last_name); ?></p>
-                    <p>User Address: <?php echo htmlspecialchars($user_add); ?></p>
+                    <p><strong>User Name: </strong> <?php echo htmlspecialchars($user_name); ?></p>
+                    <p><strong>Email Address: </strong> <?php echo htmlspecialchars($email_address); ?></p>
+                    <p><strong>Contact Number: </strong><?php echo htmlspecialchars($contact_num); ?></p>
+                    <p><strong>First Name: </strong><?php echo htmlspecialchars($first_name); ?></p>
+                    <p><strong>Last Name: </strong><?php echo htmlspecialchars($last_name); ?></p>
+                    <p><strong>User Address: </strong><?php echo htmlspecialchars($user_add); ?></p>
                     </div>
                 </div>
             </div>
