@@ -57,10 +57,48 @@ $mysqli->close();
             overflow: hidden; /* Hide overflow content */
         }
 
-        .card-img-top {
-            width: 100%; /* Ensure the image fills the container */
-            height: auto; /* Maintain aspect ratio */
+        .card{
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        align-content: center;
         }
+
+        .card-img-top {
+        width: 100%;
+        height: 250px;
+        object-fit: contain;
+        }
+
+        .card-img{
+        width: 100%;
+        height: 350px;
+        object-fit: contain;
+        }
+
+        body{
+        /* width: 100%;
+        min-height: 100vh; */
+        background-color: #218838;
+        }
+
+        h1{
+        text-align: center;
+        font-family: 'Poppins';
+        font-size: 40px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-top: 50px;   
+        }
+
+        h2{
+        text-align: left;
+        font-family: 'Poppins';
+        font-size: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 50px;   
+        }
+
     </style>
 </head>
 
