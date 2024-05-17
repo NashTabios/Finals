@@ -111,6 +111,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
+
+    // Check if the form submission is for deleting a listing
+    if (isset($_POST["delete_listing_id"])) {
+        // Get the listing ID to be deleted
+        $delete_listing_id = $_POST["delete_listing_id"];
+
+        // Prepare a delete statement
+        $sql_delete = "DELETE FROM listing WHERE listing_id = ? AND user_name = ?";
+
+        if ($stmt_delete = $mysqli->prepare($sql_delete)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt_delete->bind_param("ss", $delete_listing_id, $_SESSION["user_name"]);
+
+            // Attempt to execute the prepared statement
+            if ($stmt_delete->execute()) {
+                // Redirect to the same page to reflect the changes
+                header("location: userlistings.php");
+                exit;
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            $stmt_delete->close();
+        }
+    }
 }
 
 // Close connection
@@ -127,24 +153,69 @@ $mysqli->close();
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .card-body {
-            height: 200px;
-            /* Set a fixed height for the card body */
-            overflow: hidden;
-            /* Hide overflow content */
+            height: 250px; /* Set a fixed height for the card body */
+            overflow: hidden; /* Hide overflow content */
         }
 
         .card-img-top {
             width: 100%;
-            /* Ensure the image fills the container */
-            height: auto;
-            /* Maintain aspect ratio */
+            height: 250px;
+            object-fit: contain;
+        }
+
+        .card {
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            align-content: center;
+            margin-bottom: 20px; /* Added margin bottom */
+        }
+
+        body {
+            background-color: #218838;
+            font-family: "Ubuntu", sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Poppins';
+            font-size: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 50px;
+        }
+
+        h2 {
+            text-align: left;
+            font-family: 'Poppins';
+            font-size: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 50px;
+        }
+
+        .status-available {
+            background-color: #28a745;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }
+
+        .status-sold {
+            background-color: #dc3545;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }
+
+        h5 {
+
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>User Listings</h1>
+        <h1>Your Listings</h1>
         <?php if (empty($user_listings)) : ?>
             <p>No listings uploaded by the user.</p>
         <?php else : ?>
@@ -157,9 +228,17 @@ $mysqli->close();
                                 <h5 class="card-title"><?php echo htmlspecialchars($listing['listing_name']); ?></h5>
                                 <p class="card-text">Price: ₱<?php echo htmlspecialchars($listing['listing_price']); ?></p>
                                 <p class="card-text">Status: <?php echo htmlspecialchars($listing['status']); ?></p>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editListingModal_<?php echo $listing['listing_id']; ?>">
-                                    Edit
-                                </button>
+                                <div class="btn-group" role="group">
+                                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                                        <input type="hidden" name="delete_listing_id" value="<?php echo $listing['listing_id']; ?>">
+                                        <button type="submit" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to delete this listing?');">
+                                            Delete
+                                        </button>
+                                    </form>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editListingModal_<?php echo $listing['listing_id']; ?>">
+                                        Edit
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -208,6 +287,7 @@ $mysqli->close();
         <?php endif; ?>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

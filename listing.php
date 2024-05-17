@@ -123,7 +123,7 @@ $mysqli->close();
 
 <body>
     <div class="container">
-        <h1>Welcome to the Listing Page</h1>
+        <h1>Welcome to the Marketplace</h1>
         <?php if (isset($user_name)) : ?>
             <p style="text-align: right;">Welcome, <?php echo htmlspecialchars($user_name); ?>!</p>
             <p style="text-align: right;"><a href="createlisting.php">Create Listing</a></p>
@@ -133,7 +133,7 @@ $mysqli->close();
             <p style="text-align: right;">Welcome! <a href="login.php">Log in</a> or <a href="register.php">Register</a> to create listings.</p>
         <?php endif; ?>
 
-        <h2>Listings</h2>
+        <h2>Today's pick</h2>
         <div class="row">
             <?php foreach ($listings as $listing) : ?>
                 <div class="col-md-4 mb-4">
@@ -152,9 +152,6 @@ $mysqli->close();
             <?php endforeach; ?>
         </div>
 
-        <?php if (isset($user_name)) : ?>
-            <p><a href="?logout=1">Sign Out</a></p>
-        <?php endif; ?>
     </div>
 </body>
 

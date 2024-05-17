@@ -11,8 +11,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 
 // Define variables and initialize with empty values
-$user_name = $email_address = $first_name = $last_name = $dob = $profile_picture = $user_add = "";
-$user_name_err = $email_address_err = $first_name_err = $last_name_err = $dob_err = $profile_picture_err = $user_add_err = "";
+$user_name = $email_address = $first_name = $last_name = $dob = $profile_picture = $user_add = $contact_num = "";
+$user_name_err = $email_address_err = $first_name_err = $last_name_err = $dob_err = $profile_picture_err = $user_add_err = $contact_num_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -49,6 +49,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user_add_err = "Please enter your address.";
     } else {
         $user_add = trim($_POST["user_add"]);
+    }
+
+    // Validate contact number
+    if (empty(trim($_POST["contact_num"]))) {
+        $contact_num_err = "Please enter your contact number.";
+    } else {
+        $contact_num = trim($_POST["contact_num"]);
     }
 
     // Check if a file was uploaded
@@ -93,13 +100,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Check input errors before updating the database
-    if (empty($first_name_err) && empty($last_name_err) && empty($email_address_err) && empty($dob_err) && empty($user_add_err) && empty($profile_picture_err)) {
+    if (empty($first_name_err) && empty($last_name_err) && empty($email_address_err) && empty($dob_err) && empty($user_add_err) && empty($profile_picture_err) && empty($contact_num_err)) {
         // Prepare an update statement
-        $sql = "UPDATE users SET first_name = ?, last_name = ?, email_address = ?, dob = ?, user_add = ?, profile_picture = ? WHERE user_name = ?";
+        $sql = "UPDATE users SET first_name = ?, last_name = ?, email_address = ?, dob = ?, user_add = ?, profile_picture = ?, contact_num = ? WHERE user_name = ?";
 
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind parameters
-            $stmt->bind_param("sssssss", $param_first_name, $param_last_name, $param_email_address, $param_dob, $param_user_add, $param_profile_picture, $param_user_name);
+            $stmt->bind_param("ssssssss", $param_first_name, $param_last_name, $param_email_address, $param_dob, $param_user_add, $param_profile_picture, $param_contact_num, $param_user_name);
 
             // Set parameters
             $param_first_name = $first_name;
@@ -108,6 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_dob = $dob;
             $param_user_add = $user_add;
             $param_profile_picture = $profile_picture;
+            $param_contact_num = $contact_num;
             $param_user_name = $_SESSION["user_name"];
 
             // Attempt to execute the statement
@@ -126,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Retrieve user information from the database
-$sql = "SELECT email_address, first_name, last_name, dob, profile_picture, user_add FROM users WHERE user_name = ?";
+$sql = "SELECT email_address, first_name, last_name, dob, profile_picture, user_add, contact_num FROM users WHERE user_name = ?";
 if ($stmt = $mysqli->prepare($sql)) {
     // Bind parameters
     $stmt->bind_param("s", $param_user_name);
@@ -140,7 +148,7 @@ if ($stmt = $mysqli->prepare($sql)) {
         // Check if the user exists
         if ($stmt->num_rows == 1) {
             // Bind result variables
-            $stmt->bind_result($email_address, $first_name, $last_name, $dob, $profile_picture, $user_add);
+            $stmt->bind_result($email_address, $first_name, $last_name, $dob, $profile_picture, $user_add, $contact_num);
             $stmt->fetch();
             $user_name = $_SESSION["user_name"];
         } else {
@@ -270,6 +278,11 @@ $mysqli->close();
                             <b><label for="userAddress">Address:</label></b>
                             <input type="text" name="user_add" class="form-control editable" value="<?php echo htmlspecialchars($user_add); ?>" readonly>
                             <span class="text-danger"><?php echo $user_add_err; ?></span>
+                        </div>
+                        <div class="form-group">
+                            <b><label for="contactNumber">Contact Number:</label></b>
+                            <input type="text" name="contact_num" class="form-control editable" value="<?php echo htmlspecialchars($contact_num); ?>" readonly>
+                            <span class="text-danger"><?php echo $contact_num_err; ?></span>
                         </div>
                         <div class="form-group d-none" id="profilePicture">
                             <b><label for="profilePicture">Profile Picture:</label></b><br>

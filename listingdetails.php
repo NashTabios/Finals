@@ -21,6 +21,7 @@ if (!isset($_GET['id']) || empty(trim($_GET["id"]))) {
 $listing_name = $listing_price = $listing_desc = $listing_image = $user_name = $status = "";
 $email_address = $first_name = $last_name = "";
 $profile_picture = $user_add = "";
+$contact_num = "";
 
 // Prepare a select statement to retrieve listing details
 $sql_listing = "SELECT listing_name, listing_price, listing_desc, listing_image, user_name, status FROM listing WHERE listing_id = ?";
@@ -55,7 +56,7 @@ if ($stmt_listing = $mysqli->prepare($sql_listing)) {
 }
 
 // Prepare a select statement to retrieve user details
-$sql_user = "SELECT email_address, first_name, last_name, profile_picture, user_add FROM users WHERE user_name = ?";
+$sql_user = "SELECT email_address, first_name, last_name, profile_picture, user_add, contact_num FROM users WHERE user_name = ?";
 
 if ($stmt_user = $mysqli->prepare($sql_user)) {
     // Bind variables to the prepared statement as parameters
@@ -72,7 +73,7 @@ if ($stmt_user = $mysqli->prepare($sql_user)) {
         // Check if user exists
         if ($stmt_user->num_rows == 1) {
             // Bind result variables
-            $stmt_user->bind_result($email_address, $first_name, $last_name, $profile_picture, $user_add);
+            $stmt_user->bind_result($email_address, $first_name, $last_name, $profile_picture, $user_add, $contact_num);
             $stmt_user->fetch();
         } else {
             echo "User not found.";
@@ -97,32 +98,30 @@ $mysqli->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listing Details</title>
+    <link rel="stylesheet" href="listingdetails.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .listing-image {
-            max-width: 100%;
-            height: auto;
-            max-height: 300px;
-        }
-
-        .profile-picture {
-            max-width: 150px;
-            height: auto;
-        }
-    </style>
 </head>
 
 <body>
+<main>
+    <div class="nero">
+      <div class="nero__heading">
+        <span class="nero__bold">Product </span>Details
+      </div>
+      <p class="nero__text">
+      </p>
+    </div>
+  </main>
     <div class="container">
-        <h1>Listing Details</h1>
-        <div>
             <img src="<?php echo htmlspecialchars($listing_image); ?>" alt="Listing Image" class="listing-image">
-            <div>
-                <h2><?php echo htmlspecialchars($listing_name); ?></h2>
+                <div class="box"><!-- box Starts -->
+                <h2 class="text-center"><?php echo htmlspecialchars($listing_name); ?></h2>
+                <br>
                 <p><?php echo htmlspecialchars($listing_desc); ?></p>
                 <p>Price: ₱<?php echo htmlspecialchars($listing_price); ?></p>
                 <p>Status: <?php echo htmlspecialchars($status); ?></p>
                 <p>Uploaded by: <?php echo htmlspecialchars($user_name); ?></p>
+                </div>
             </div>
         </div>
         <div>
@@ -132,6 +131,7 @@ $mysqli->close();
             <?php endif; ?>
             <p>User Name: <?php echo htmlspecialchars($user_name); ?></p>
             <p>Email Address: <?php echo htmlspecialchars($email_address); ?></p>
+            <p>Contact Number: <?php echo htmlspecialchars($contact_num); ?></p>
             <p>First Name: <?php echo htmlspecialchars($first_name); ?></p>
             <p>Last Name: <?php echo htmlspecialchars($last_name); ?></p>
             <p>User Address: <?php echo htmlspecialchars($user_add); ?></p>
