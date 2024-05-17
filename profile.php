@@ -286,5 +286,20 @@ $mysqli->close();
     </div>
 
 </body>
+<script>
+const listingImageInput = document.querySelector('input[type="file"]');
+  const profileImage = document.querySelector('.rounded-circle');
+
+  listingImageInput.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+      profileImage.src = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  });
+</script>
 
 </html>
