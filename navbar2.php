@@ -50,7 +50,6 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
       <div class="menu-links">
           <a href="index.php">Home</a>
           <a href="aboutus.php">About</a>
-          <a href="listings.php">Listings</a>
         </div>
         <a href="login.php">
         <button class="log-in">Sign-In</button>
