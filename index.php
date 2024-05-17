@@ -29,7 +29,7 @@
     <div class="container">
       <nav class="navbar">
         <div class="nav-logo">
-          <p>REPS</p>
+          <p>RECYCLING EXCHANGE PLATFORM FOR SUSTAINABILITY</p>
         </div>
         <div class="nav-items">
          <a href="index.php" class="menu-item">Home</a>
