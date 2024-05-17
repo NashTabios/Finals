@@ -68,7 +68,6 @@ $mysqli->close();
         <?php if (isset($user_name)) : ?>
             <p style="text-align: right;">Welcome, <?php echo htmlspecialchars($user_name); ?>!</p>
             <p style="text-align: right;"><a href="createlisting.php"> + Create Listing</a></p>
-            <p style="text-align: right;"><a href="profile.php">Profile</a></p>
             <p style="text-align: right;"><a href="userlistings.php">Your Listings</a></p>
         <?php else : ?>
             <p style="text-align: right;">Welcome! <a href="login.php">Log in</a> or <a href="register.php">Register</a> to create listings.</p>
