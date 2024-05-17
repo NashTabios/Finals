@@ -18,12 +18,13 @@ if (!isset($_GET['id']) || empty(trim($_GET["id"]))) {
 }
 
 // Initialize variables
-$listing_name = $listing_price = $listing_desc = $listing_image = $user_name = "";
+$listing_name = $listing_price = $listing_desc = $listing_image = $user_name = $status = "";
 $email_address = $first_name = $last_name = "";
 $profile_picture = $user_add = "";
+$contact_num = "";
 
 // Prepare a select statement to retrieve listing details
-$sql_listing = "SELECT listing_name, listing_price, listing_desc, listing_image, user_name FROM listing WHERE listing_id = ?";
+$sql_listing = "SELECT listing_name, listing_price, listing_desc, listing_image, user_name, status FROM listing WHERE listing_id = ?";
 
 if ($stmt_listing = $mysqli->prepare($sql_listing)) {
     // Bind variables to the prepared statement as parameters
@@ -40,7 +41,7 @@ if ($stmt_listing = $mysqli->prepare($sql_listing)) {
         // Check if listing exists
         if ($stmt_listing->num_rows == 1) {
             // Bind result variables
-            $stmt_listing->bind_result($listing_name, $listing_price, $listing_desc, $listing_image, $user_name);
+            $stmt_listing->bind_result($listing_name, $listing_price, $listing_desc, $listing_image, $user_name, $status);
             $stmt_listing->fetch();
         } else {
             echo "Listing not found.";
@@ -55,7 +56,7 @@ if ($stmt_listing = $mysqli->prepare($sql_listing)) {
 }
 
 // Prepare a select statement to retrieve user details
-$sql_user = "SELECT email_address, first_name, last_name, profile_picture, user_add FROM users WHERE user_name = ?";
+$sql_user = "SELECT email_address, first_name, last_name, profile_picture, user_add, contact_num FROM users WHERE user_name = ?";
 
 if ($stmt_user = $mysqli->prepare($sql_user)) {
     // Bind variables to the prepared statement as parameters
@@ -72,7 +73,7 @@ if ($stmt_user = $mysqli->prepare($sql_user)) {
         // Check if user exists
         if ($stmt_user->num_rows == 1) {
             // Bind result variables
-            $stmt_user->bind_result($email_address, $first_name, $last_name, $profile_picture, $user_add);
+            $stmt_user->bind_result($email_address, $first_name, $last_name, $profile_picture, $user_add, $contact_num);
             $stmt_user->fetch();
         } else {
             echo "User not found.";
@@ -118,6 +119,7 @@ $mysqli->close();
                 <br>
                 <p><?php echo htmlspecialchars($listing_desc); ?></p>
                 <p>Price: ₱<?php echo htmlspecialchars($listing_price); ?></p>
+                <p>Status: <?php echo htmlspecialchars($status); ?></p>
                 <p>Uploaded by: <?php echo htmlspecialchars($user_name); ?></p>
                 </div>
             </div>
@@ -129,6 +131,7 @@ $mysqli->close();
             <?php endif; ?>
             <p>User Name: <?php echo htmlspecialchars($user_name); ?></p>
             <p>Email Address: <?php echo htmlspecialchars($email_address); ?></p>
+            <p>Contact Number: <?php echo htmlspecialchars($contact_num); ?></p>
             <p>First Name: <?php echo htmlspecialchars($first_name); ?></p>
             <p>Last Name: <?php echo htmlspecialchars($last_name); ?></p>
             <p>User Address: <?php echo htmlspecialchars($user_add); ?></p>
@@ -137,4 +140,3 @@ $mysqli->close();
 </body>
 
 </html>
-

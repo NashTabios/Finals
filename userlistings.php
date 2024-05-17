@@ -3,7 +3,7 @@ session_start();
 
 // Include config file
 require_once "config.php";
-include 'navbar.php';
+include 'navbar2.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
@@ -18,7 +18,7 @@ $user_name = $_SESSION["user_name"];
 $user_listings = [];
 
 // Retrieve listings uploaded by the current user from the database
-$sql = "SELECT listing_id, listing_name, listing_price, listing_desc, listing_image FROM listing WHERE user_name = ?";
+$sql = "SELECT listing_id, listing_name, listing_price, listing_image, status FROM listing WHERE user_name = ?";
 if ($stmt = $mysqli->prepare($sql)) {
     // Bind variables to the prepared statement as parameters
     $stmt->bind_param("s", $user_name);
@@ -31,15 +31,15 @@ if ($stmt = $mysqli->prepare($sql)) {
         // Check if user has uploaded any listings
         if ($stmt->num_rows > 0) {
             // Bind result variables
-            $stmt->bind_result($listing_id, $listing_name, $listing_price, $listing_desc, $listing_image);
+            $stmt->bind_result($listing_id, $listing_name, $listing_price, $listing_image, $status);
             // Fetch result rows into array
             while ($stmt->fetch()) {
                 $user_listings[] = array(
                     'listing_id' => $listing_id,
                     'listing_name' => $listing_name,
                     'listing_price' => $listing_price,
-                    'listing_desc' => $listing_desc,
-                    'listing_image' => $listing_image
+                    'listing_image' => $listing_image,
+                    'status' => $status
                 );
             }
         } else {
@@ -56,12 +56,12 @@ if ($stmt = $mysqli->prepare($sql)) {
 // Check if form data has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the form submission is for updating a listing
-    if (isset($_POST["edit_listing_name"]) && isset($_POST["edit_listing_price"]) && isset($_POST["edit_listing_desc"]) && isset($_POST["listing_id"])) {
+    if (isset($_POST["edit_listing_name"]) && isset($_POST["edit_listing_price"]) && isset($_POST["edit_listing_status"]) && isset($_POST["listing_id"])) {
         // Get the form data
         $listing_id = $_POST["listing_id"];
         $edit_listing_name = $_POST["edit_listing_name"];
         $edit_listing_price = $_POST["edit_listing_price"];
-        $edit_listing_desc = $_POST["edit_listing_desc"];
+        $edit_listing_status = $_POST["edit_listing_status"];
 
         // Check if a new image file has been uploaded
         if (!empty($_FILES["edit_listing_image"]["name"])) {
@@ -70,10 +70,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $target_file = $target_dir . basename($_FILES["edit_listing_image"]["name"]);
             if (move_uploaded_file($_FILES["edit_listing_image"]["tmp_name"], $target_file)) {
                 // Update the listing in the database with the new image file path
-                $sql = "UPDATE listing SET listing_name=?, listing_price=?, listing_desc=?, listing_image=? WHERE listing_id=? AND user_name=?";
+                $sql = "UPDATE listing SET listing_name=?, listing_price=?, listing_image=?, status=? WHERE listing_id=? AND user_name=?";
                 if ($stmt = $mysqli->prepare($sql)) {
                     // Bind variables to the prepared statement as parameters
-                    $stmt->bind_param("ssssss", $edit_listing_name, $edit_listing_price, $edit_listing_desc, $target_file, $listing_id, $_SESSION["user_name"]);
+                    $stmt->bind_param("ssssss", $edit_listing_name, $edit_listing_price, $target_file, $edit_listing_status, $listing_id, $_SESSION["user_name"]);
 
                     // Attempt to execute the prepared statement
                     if ($stmt->execute()) {
@@ -92,10 +92,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } else {
             // Update the listing in the database without changing the image file path
-            $sql = "UPDATE listing SET listing_name=?, listing_price=?, listing_desc=? WHERE listing_id=? AND user_name=?";
+            $sql = "UPDATE listing SET listing_name=?, listing_price=?, status=? WHERE listing_id=? AND user_name=?";
             if ($stmt = $mysqli->prepare($sql)) {
                 // Bind variables to the prepared statement as parameters
-                $stmt->bind_param("sssss", $edit_listing_name, $edit_listing_price, $edit_listing_desc, $listing_id, $_SESSION["user_name"]);
+                $stmt->bind_param("sssss", $edit_listing_name, $edit_listing_price, $edit_listing_status, $listing_id, $_SESSION["user_name"]);
 
                 // Attempt to execute the prepared statement
                 if ($stmt->execute()) {
@@ -109,6 +109,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Close statement
                 $stmt->close();
             }
+        }
+    }
+
+    // Check if the form submission is for deleting a listing
+    if (isset($_POST["delete_listing_id"])) {
+        // Get the listing ID to be deleted
+        $delete_listing_id = $_POST["delete_listing_id"];
+
+        // Prepare a delete statement
+        $sql_delete = "DELETE FROM listing WHERE listing_id = ? AND user_name = ?";
+
+        if ($stmt_delete = $mysqli->prepare($sql_delete)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt_delete->bind_param("ss", $delete_listing_id, $_SESSION["user_name"]);
+
+            // Attempt to execute the prepared statement
+            if ($stmt_delete->execute()) {
+                // Redirect to the same page to reflect the changes
+                header("location: userlistings.php");
+                exit;
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            $stmt_delete->close();
         }
     }
 }
@@ -127,24 +153,69 @@ $mysqli->close();
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .card-body {
-            height: 200px;
-            /* Set a fixed height for the card body */
-            overflow: hidden;
-            /* Hide overflow content */
+            height: 250px; /* Set a fixed height for the card body */
+            overflow: hidden; /* Hide overflow content */
         }
 
         .card-img-top {
             width: 100%;
-            /* Ensure the image fills the container */
-            height: auto;
-            /* Maintain aspect ratio */
+            height: 250px;
+            object-fit: contain;
+        }
+
+        .card {
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            align-content: center;
+            margin-bottom: 20px; /* Added margin bottom */
+        }
+
+        body {
+            background-color: #218838;
+            font-family: "Ubuntu", sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Poppins';
+            font-size: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 50px;
+        }
+
+        h2 {
+            text-align: left;
+            font-family: 'Poppins';
+            font-size: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 50px;
+        }
+
+        .status-available {
+            background-color: #28a745;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }
+
+        .status-sold {
+            background-color: #dc3545;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }
+
+        h5 {
+
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>User Listings</h1>
+        <h1>Your Listings</h1>
         <?php if (empty($user_listings)) : ?>
             <p>No listings uploaded by the user.</p>
         <?php else : ?>
@@ -155,11 +226,19 @@ $mysqli->close();
                             <img src="<?php echo htmlspecialchars($listing['listing_image']); ?>" class="card-img-top" alt="Listing Image">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($listing['listing_name']); ?></h5>
-                                <p class="card-text"><?php echo htmlspecialchars($listing['listing_desc']); ?></p>
                                 <p class="card-text">Price: ₱<?php echo htmlspecialchars($listing['listing_price']); ?></p>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editListingModal_<?php echo $listing['listing_id']; ?>">
-                                    Edit
-                                </button>
+                                <p class="card-text">Status: <?php echo htmlspecialchars($listing['status']); ?></p>
+                                <div class="btn-group" role="group">
+                                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                                        <input type="hidden" name="delete_listing_id" value="<?php echo $listing['listing_id']; ?>">
+                                        <button type="submit" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to delete this listing?');">
+                                            Delete
+                                        </button>
+                                    </form>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editListingModal_<?php echo $listing['listing_id']; ?>">
+                                        Edit
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -170,7 +249,7 @@ $mysqli->close();
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="editListingModalLabel_<?php echo $listing['listing_id']; ?>">Edit Listing</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                        <span aria-hidden="true"></span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
@@ -187,8 +266,11 @@ $mysqli->close();
                                             <input type="text" class="form-control" id="edit_listing_price_<?php echo $listing['listing_id']; ?>" name="edit_listing_price" value="<?php echo htmlspecialchars($listing['listing_price']); ?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for="edit_listing_desc_<?php echo $listing['listing_id']; ?>">Listing Description</label>
-                                            <textarea class="form-control" id="edit_listing_desc_<?php echo $listing['listing_id']; ?>" name="edit_listing_desc"><?php echo htmlspecialchars($listing['listing_desc']); ?></textarea>
+                                            <label for="edit_listing_status_<?php echo $listing['listing_id']; ?>">Status</label>
+                                            <select class="form-control" id="edit_listing_status_<?php echo $listing['listing_id']; ?>" name="edit_listing_status">
+                                                <option value="available" <?php if ($listing['status'] === 'available') echo 'selected'; ?>>Available</option>
+                                                <option value="sold" <?php if ($listing['status'] === 'sold') echo 'selected'; ?>>Sold</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="edit_listing_image_<?php echo $listing['listing_id']; ?>">Upload Image</label>
@@ -204,10 +286,8 @@ $mysqli->close();
             </div>
         <?php endif; ?>
     </div>
-
-    <!-- Bootstrap JS and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
+

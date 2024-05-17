@@ -71,11 +71,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         if (move_uploaded_file($_FILES["listing_image"]["tmp_name"], $targetFile)) {
             // File uploaded successfully, proceed with other data insertion
-            $sql = "INSERT INTO listing (listing_name, listing_price, listing_desc, listing_image, user_name) VALUES (?, ?, ?, ?, ?)";
+            $status = "available"; // Set the status
+            $sql = "INSERT INTO listing (listing_name, listing_price, listing_desc, listing_image, user_name, status) VALUES (?, ?, ?, ?, ?, ?)";
 
             if ($stmt = $mysqli->prepare($sql)) {
                 // Bind variables to the prepared statement as parameters
-                $stmt->bind_param("sssss", $param_listing_name, $param_listing_price, $param_listing_desc, $param_listing_image, $param_user_name);
+                $stmt->bind_param("ssssss", $param_listing_name, $param_listing_price, $param_listing_desc, $param_listing_image, $param_user_name, $param_status);
 
                 // Set parameters
                 $param_listing_name = $listing_name;
@@ -83,6 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $param_listing_desc = $listing_desc;
                 $param_listing_image = $targetFile;
                 $param_user_name = $_SESSION["user_name"];
+                $param_status = $status;
 
                 // Attempt to execute the prepared statement
                 if ($stmt->execute()) {
@@ -100,8 +102,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $listing_image_err = "Sorry, there was an error uploading your file.";
         }
     }
-
-    
 
     // Close connection
     $mysqli->close();

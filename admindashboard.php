@@ -24,7 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
 require_once "config.php";
 
 // Function to delete user by ID
-function deleteUser($user_id, $mysqli) {
+function deleteUser($user_id, $mysqli)
+{
     $sql = "DELETE FROM users WHERE id = ?";
     if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("i", $user_id);
@@ -37,7 +38,8 @@ function deleteUser($user_id, $mysqli) {
 }
 
 // Function to delete listing by ID
-function deleteListing($listing_id, $mysqli) {
+function deleteListing($listing_id, $mysqli)
+{
     $sql = "DELETE FROM listing WHERE listing_id = ?";
     if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("i", $listing_id);
@@ -114,6 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editListingId'])) {
     $editListingName = $_POST['editListingName'];
     $editListingPrice = $_POST['editListingPrice'];
     $editListingDesc = $_POST['editListingDesc'];
+    $editListingStatus = $_POST['editListingStatus']; // Added status field
 
     // Check if a new listing image file is uploaded
     if ($_FILES['editListingImage']['error'] == UPLOAD_ERR_OK) {
@@ -125,10 +128,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editListingId'])) {
         move_uploaded_file($_FILES['editListingImage']['tmp_name'], $listing_image);
     }
 
-    // Update the listing in the database
-    $sql = "UPDATE listing SET listing_name = ?, listing_price = ?, listing_desc = ?, listing_image = ? WHERE listing_id = ?";
+    // Update the listing in the database with the status
+    $sql = "UPDATE listing SET listing_name = ?, listing_price = ?, listing_desc = ?, listing_image = ?, status = ? WHERE listing_id = ?";
     if ($stmt = $mysqli->prepare($sql)) {
-        $stmt->bind_param("ssssi", $editListingName, $editListingPrice, $editListingDesc, $listing_image, $editListingId);
+        $stmt->bind_param("sssssi", $editListingName, $editListingPrice, $editListingDesc, $listing_image, $editListingStatus, $editListingId);
         if ($stmt->execute()) {
             // Redirect to refresh the page after successful update
             header("location: admindashboard.php");
@@ -156,7 +159,7 @@ if ($result_users = $mysqli->query($sql_users)) {
 }
 
 // Fetch listing details from the database
-$sql_listings = "SELECT listing_id, listing_name, listing_price, listing_desc, listing_image FROM listing";
+$sql_listings = "SELECT listing_id, listing_name, listing_price, listing_desc, listing_image, status FROM listing";
 if ($result_listings = $mysqli->query($sql_listings)) {
     while ($row = $result_listings->fetch_assoc()) {
         $listing_data[] = $row;
@@ -203,7 +206,7 @@ $mysqli->close();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($user_data as $user): ?>
+                        <?php foreach ($user_data as $user) : ?>
                             <tr>
                                 <td><?php echo $user['id']; ?></td>
                                 <td><?php echo $user['email_address']; ?></td>
@@ -241,6 +244,7 @@ $mysqli->close();
                             <th>Price</th>
                             <th>Description</th>
                             <th>Image</th>
+                            <th>Status</th> <!-- Added status column -->
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -253,9 +257,10 @@ $mysqli->close();
                                 <td><?php echo $listing['listing_desc']; ?></td>
                                 <!-- Display image -->
                                 <td><img src="<?php echo $listing['listing_image']; ?>" alt="Listing Image" style="max-width: 100px;"></td>
+                                <td><?php echo $listing['status']; ?></td> <!-- Display status -->
                                 <td>
                                     <!-- Edit button -->
-                                    <button type="button" class="btn btn-primary edit-listing-btn" data-toggle="modal" data-target="#editListingModal" data-id="<?php echo $listing['listing_id']; ?>" data-name="<?php echo $listing['listing_name']; ?>" data-price="<?php echo $listing['listing_price']; ?>" data-description="<?php echo $listing['listing_desc']; ?>">Edit</button>
+                                    <button type="button" class="btn btn-primary edit-listing-btn" data-toggle="modal" data-target="#editListingModal" data-id="<?php echo $listing['listing_id']; ?>" data-name="<?php echo $listing['listing_name']; ?>" data-price="<?php echo $listing['listing_price']; ?>" data-description="<?php echo $listing['listing_desc']; ?>" data-status="<?php echo $listing['status']; ?>">Edit</button>
                                     <!-- Delete button -->
                                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                         <input type="hidden" name="delete_listing" value="<?php echo $listing['listing_id']; ?>">
@@ -276,89 +281,96 @@ $mysqli->close();
     </div>
 
     <!-- Edit User Modal -->
-<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="editUserForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-                    <input type="hidden" id="editUserId" name="editUserId">
-                    <div class="form-group">
-                        <label for="editEmail">Email Address</label>
-                        <input type="email" class="form-control" id="editEmail" name="editEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editUserName">User Name</label>
-                        <input type="text" class="form-control" id="editUserName" name="editUserName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editFirstName">First Name</label>
-                        <input type="text" class="form-control" id="editFirstName" name="editFirstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editLastName">Last Name</label>
-                        <input type="text" class="form-control" id="editLastName" name="editLastName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editDob">Date of Birth</label>
-                        <input type="date" class="form-control" id="editDob" name="editDob" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editUserAdd">Address</label>
-                        <input type="text" class="form-control" id="editUserAdd" name="editUserAdd" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editProfilePicture">Profile Picture</label>
-                        <input type="file" class="form-control-file" id="editProfilePicture" name="editProfilePicture">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editUserForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" id="editUserId" name="editUserId">
+                        <div class="form-group">
+                            <label for="editEmail">Email Address</label>
+                            <input type="email" class="form-control" id="editEmail" name="editEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserName">User Name</label>
+                            <input type="text" class="form-control" id="editUserName" name="editUserName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editFirstName">First Name</label>
+                            <input type="text" class="form-control" id="editFirstName" name="editFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editLastName">Last Name</label>
+                            <input type="text" class="form-control" id="editLastName" name="editLastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editDob">Date of Birth</label>
+                            <input type="date" class="form-control" id="editDob" name="editDob" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserAdd">Address</label>
+                            <input type="text" class="form-control" id="editUserAdd" name="editUserAdd" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProfilePicture">Profile Picture</label>
+                            <input type="file" class="form-control-file" id="editProfilePicture" name="editProfilePicture">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
     <!-- Edit Listing Modal -->
-<div class="modal fade" id="editListingModal" tabindex="-1" role="dialog" aria-labelledby="editListingModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editListingModalLabel">Edit Listing</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="editListingForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-                    <input type="hidden" id="editListingId" name="editListingId">
-                    <div class="form-group">
-                        <label for="editListingName">Listing Name</label>
-                        <input type="text" class="form-control" id="editListingName" name="editListingName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editListingPrice">Price</label>
-                        <input type="text" class="form-control" id="editListingPrice" name="editListingPrice" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editListingDesc">Description</label>
-                        <textarea class="form-control" id="editListingDesc" name="editListingDesc" rows="3" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="editListingImage">Listing Image</label>
-                        <input type="file" class="form-control-file" id="editListingImage" name="editListingImage">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
+    <div class="modal fade" id="editListingModal" tabindex="-1" role="dialog" aria-labelledby="editListingModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editListingModalLabel">Edit Listing</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editListingForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" id="editListingId" name="editListingId">
+                        <div class="form-group">
+                            <label for="editListingName">Listing Name</label>
+                            <input type="text" class="form-control" id="editListingName" name="editListingName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editListingPrice">Price</label>
+                            <input type="text" class="form-control" id="editListingPrice" name="editListingPrice" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editListingDesc">Description</label>
+                            <textarea class="form-control" id="editListingDesc" name="editListingDesc" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editListingImage">Listing Image</label>
+                            <input type="file" class="form-control-file" id="editListingImage" name="editListingImage">
+                        </div>
+                        <div class="form-group">
+                            <label for="editListingStatus">Status</label> <!-- Added status field -->
+                            <select class="form-control" id="editListingStatus" name="editListingStatus">
+                                <option value="available">Available</option>
+                                <option value="sold">Sold</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -367,7 +379,7 @@ $mysqli->close();
 
     <script>
         // Fill Edit User Modal with data when Edit button is clicked
-        $(document).on("click", ".edit-user-btn", function () {
+        $(document).on("click", ".edit-user-btn", function() {
             var id = $(this).data('id');
             var email = $(this).data('email');
             var username = $(this).data('username');
@@ -386,20 +398,20 @@ $mysqli->close();
         });
 
         // Fill Edit Listing Modal with data when Edit button is clicked
-        $(document).on("click", ".edit-listing-btn", function () {
+        $(document).on("click", ".edit-listing-btn", function() {
             var id = $(this).data('id');
             var name = $(this).data('name');
             var price = $(this).data('price');
             var description = $(this).data('description');
+            var status = $(this).data('status'); // Get status data
 
             $("#editListingId").val(id);
             $("#editListingName").val(name);
             $("#editListingPrice").val(price);
             $("#editListingDesc").val(description);
+            $("#editListingStatus").val(status); // Set status value in the dropdown
         });
     </script>
 </body>
 
 </html>
-
-
