@@ -115,48 +115,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Listing</title>
+    <link rel="stylesheet" href="createlisting.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .container {
-            max-width: 1100px;
-            margin-top: 75px;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-    
-        }
-
-        .row {
-            display: flex;
-            justify-content: center;
-        }
-
-        .listing-content {
-            display: flex;
-            justify-content: center;
-        }
-
-        .listing-img {
-            margin-right: 30px;
-            display: flex;
-            align-items: center;
-        }
-
-        .product_image {
-            margin-bottom: 1rem;
-            width: 350px;
-            height: 350px;
-            padding: 1px;
-        }
-
-        .listing-info {
-            border-radius: 20px;
-            background-color: white;
-            padding: 30px;
-            width: 550px;
-        }
-    </style>
 </head>
 
 <body>

@@ -154,6 +154,7 @@ body {
     display: inline-block;
     width: auto;
     text-decoration: none;
+}
 
 .admin-link:hover, .about-us-link:hover {
     color: #28a745;
