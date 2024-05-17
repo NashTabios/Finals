@@ -114,11 +114,12 @@ $mysqli->close();
   </main>
     <div class="container">
     <div class="row">
-        <div class="col-md-4">
+        
+        <div class="col-md-6">
             <img src="<?php echo htmlspecialchars($listing_image); ?>" alt="Listing Image" class="listing-image">
         </div>  
-        
-        <div class="col-md-8">
+
+        <div class="col-md-6">
             <div class="box mb-5"><!-- box Starts -->
                 <h2 class="text-center"><?php echo htmlspecialchars($listing_name); ?></h2>
                 <br>
