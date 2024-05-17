@@ -76,14 +76,10 @@ $mysqli->close();
         }
 
         body{
-<<<<<<< HEAD
-            background-color: #218838;
-=======
         /* width: 100%;
         min-height: 100vh; */
         background-color: #218838;
         font-family: "Ubuntu", sans-serif;
->>>>>>> c00a008652e2d6d8ecc3b54fa2a46ba139babd46
         }
 
         h1{
