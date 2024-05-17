@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2024 at 02:31 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Generation Time: May 17, 2024 at 03:04 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -94,7 +94,8 @@ INSERT INTO `users` (`id`, `email_address`, `user_name`, `first_name`, `last_nam
 (12, 'lebron@gmail.com', 'lbj', 'LeBron Jr.', 'James', '2023-12-31', 'lebronjames', 'uploads/Screenshot 2024-05-13 211855.png', 'Los Angeles, CA, US'),
 (13, 'steph.curry@gmail.com', 'stephcurry30', 'Stephen', 'Curry', '2016-01-04', 'stephcurry', 'uploads/steph.jpg', 'San Francisco, CA, US'),
 (14, 'ninjawarrior@gmail.com', 'ninjawarrior2024', 'John', 'Doe', '2024-04-28', 'ninjawarrior', 'uploads/Screenshot 2024-05-13 205320.png', 'SM Marikina, Marcos Highway, Marikina City'),
-(15, 'joedoe@gmail.com', 'jonathandunkit', 'Jonathan', 'Doe', '2024-04-28', 'joedoe', '', '');
+(15, 'joedoe@gmail.com', 'jonathandunkit', 'Jonathan', 'Doe', '2024-04-28', 'joedoe', '', ''),
+(16, 'bill@gmail.com', 'billy', 'billy', 'joe', '2024-05-17', '12345', '', '');
 
 --
 -- Indexes for dumped tables
@@ -138,7 +139,7 @@ ALTER TABLE `listing`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
