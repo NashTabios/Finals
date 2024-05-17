@@ -113,28 +113,36 @@ $mysqli->close();
     </div>
   </main>
     <div class="container">
+    <div class="row">
+        <div class="col-md-4">
             <img src="<?php echo htmlspecialchars($listing_image); ?>" alt="Listing Image" class="listing-image">
-                <div class="box"><!-- box Starts -->
+        </div>  
+        
+        <div class="col-md-8">
+            <div class="box mb-4"><!-- box Starts -->
                 <h2 class="text-center"><?php echo htmlspecialchars($listing_name); ?></h2>
                 <br>
                 <p><?php echo htmlspecialchars($listing_desc); ?></p>
                 <p>Price: ₱<?php echo htmlspecialchars($listing_price); ?></p>
                 <p>Status: <?php echo htmlspecialchars($status); ?></p>
                 <p>Uploaded by: <?php echo htmlspecialchars($user_name); ?></p>
-                </div>
-        <div class="box same-height"><!-- box same-height Starts -->
-        <h3 class="text-center"> Seller information </h3>
-            <?php if (!empty($profile_picture)) : ?>
-                <img src="<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" class="profile-picture">
-            <?php endif; ?>
-            <p>User Name: <?php echo htmlspecialchars($user_name); ?></p>
-            <p>Email Address: <?php echo htmlspecialchars($email_address); ?></p>
-            <p>Contact Number: <?php echo htmlspecialchars($contact_num); ?></p>
-            <p>First Name: <?php echo htmlspecialchars($first_name); ?></p>
-            <p>Last Name: <?php echo htmlspecialchars($last_name); ?></p>
-            <p>User Address: <?php echo htmlspecialchars($user_add); ?></p>
+            </div>
+
+            <div class="box same-height"><!-- box same-height Starts -->
+                <h3 class="text-center"> Seller information </h3>
+                <?php if (!empty($profile_picture)) : ?>
+                    <img src="<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" class="profile-picture">
+                <?php endif; ?>
+                <p>User Name: <?php echo htmlspecialchars($user_name); ?></p>
+                <p>Email Address: <?php echo htmlspecialchars($email_address); ?></p>
+                <p>Contact Number: <?php echo htmlspecialchars($contact_num); ?></p>
+                <p>First Name: <?php echo htmlspecialchars($first_name); ?></p>
+                <p>Last Name: <?php echo htmlspecialchars($last_name); ?></p>
+                <p>User Address: <?php echo htmlspecialchars($user_add); ?></p>
+            </div>
+
         </div>
-        </div>
+    </div>
     </div>
 </body>
 
