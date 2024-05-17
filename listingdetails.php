@@ -119,7 +119,7 @@ $mysqli->close();
         </div>  
         
         <div class="col-md-8">
-            <div class="box mb-4"><!-- box Starts -->
+            <div class="box mb-5"><!-- box Starts -->
                 <h2 class="text-center"><?php echo htmlspecialchars($listing_name); ?></h2>
                 <br>
                 <p><?php echo htmlspecialchars($listing_desc); ?></p>
@@ -130,15 +130,22 @@ $mysqli->close();
 
             <div class="box same-height"><!-- box same-height Starts -->
                 <h3 class="text-center"> Seller information </h3>
+                <br>
+                <div class="row">
                 <?php if (!empty($profile_picture)) : ?>
+                    <div class="col-md-4">
                     <img src="<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" class="profile-picture">
+                    </div>
                 <?php endif; ?>
-                <p>User Name: <?php echo htmlspecialchars($user_name); ?></p>
-                <p>Email Address: <?php echo htmlspecialchars($email_address); ?></p>
-                <p>Contact Number: <?php echo htmlspecialchars($contact_num); ?></p>
-                <p>First Name: <?php echo htmlspecialchars($first_name); ?></p>
-                <p>Last Name: <?php echo htmlspecialchars($last_name); ?></p>
-                <p>User Address: <?php echo htmlspecialchars($user_add); ?></p>
+                    <div class="col-md-8">
+                    <p>User Name: <?php echo htmlspecialchars($user_name); ?></p>
+                    <p>Email Address: <?php echo htmlspecialchars($email_address); ?></p>
+                    <p>Contact Number: <?php echo htmlspecialchars($contact_num); ?></p>
+                    <p>First Name: <?php echo htmlspecialchars($first_name); ?></p>
+                    <p>Last Name: <?php echo htmlspecialchars($last_name); ?></p>
+                    <p>User Address: <?php echo htmlspecialchars($user_add); ?></p>
+                    </div>
+                </div>
             </div>
 
         </div>
