@@ -98,32 +98,30 @@ $mysqli->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listing Details</title>
+    <link rel="stylesheet" href="listingdetails.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .listing-image {
-            max-width: 100%;
-            height: auto;
-            max-height: 300px;
-        }
-
-        .profile-picture {
-            max-width: 150px;
-            height: auto;
-        }
-    </style>
 </head>
 
 <body>
+<main>
+    <div class="nero">
+      <div class="nero__heading">
+        <span class="nero__bold">Product </span>Details
+      </div>
+      <p class="nero__text">
+      </p>
+    </div>
+  </main>
     <div class="container">
-        <h1>Listing Details</h1>
-        <div>
             <img src="<?php echo htmlspecialchars($listing_image); ?>" alt="Listing Image" class="listing-image">
-            <div>
-                <h2><?php echo htmlspecialchars($listing_name); ?></h2>
+                <div class="box"><!-- box Starts -->
+                <h2 class="text-center"><?php echo htmlspecialchars($listing_name); ?></h2>
+                <br>
                 <p><?php echo htmlspecialchars($listing_desc); ?></p>
                 <p>Price: ₱<?php echo htmlspecialchars($listing_price); ?></p>
                 <p>Status: <?php echo htmlspecialchars($status); ?></p>
                 <p>Uploaded by: <?php echo htmlspecialchars($user_name); ?></p>
+                </div>
             </div>
         </div>
         <div>

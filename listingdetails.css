@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Adds space between the main sections */
+}
+
+.listing-details {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px; /* Adds space between the image and the box */
+    width: 100%;
+    max-width: 1200px; /* Optional: constrain the width of the container */
+}
+
+.listing-image {
+    padding-top: 30px;
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    flex-shrink: 0; /* Prevents the image from shrinking */
+}
+
+.box {
+    background: #fff;
+    border: solid 1px #e6e6e6;
+    padding: 20px;
+    width: 300px; /* Fixed width for the box */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    flex-shrink: 0; /* Prevents the box from shrinking */
+}
+
+.profile-picture {
+    max-width: 150px;
+    height: auto;
+}
+
+.nero {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    font-family: 'montserratlight', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFF;
+    background: #666 url("registerbg.svg") no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.nero__heading {
+    font-size: 48px;
+}
+
+.nero__bold {
+    font-weight: 700;
+}
+
+.nero__text {
+    font-size: 30px;
+}
