@@ -81,6 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editUserId'])) {
     $editLastName = $_POST['editLastName'];
     $editDob = $_POST['editDob'];
     $editUserAdd = $_POST['editUserAdd'];
+    $editContactNum = $_POST['editContactNum']; // New field for contact number
 
     // Check if a new profile picture file is uploaded
     if ($_FILES['editProfilePicture']['error'] == UPLOAD_ERR_OK) {
@@ -93,9 +94,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editUserId'])) {
     }
 
     // Update the user in the database
-    $sql = "UPDATE users SET email_address = ?, user_name = ?, first_name = ?, last_name = ?, dob = ?, user_add = ?, profile_picture = ? WHERE id = ?";
+    $sql = "UPDATE users SET email_address = ?, user_name = ?, first_name = ?, last_name = ?, dob = ?, user_add = ?, contact_num = ?, profile_picture = ? WHERE id = ?";
     if ($stmt = $mysqli->prepare($sql)) {
-        $stmt->bind_param("sssssssi", $editEmail, $editUserName, $editFirstName, $editLastName, $editDob, $editUserAdd, $profile_picture, $editUserId);
+        $stmt->bind_param("ssssssssi", $editEmail, $editUserName, $editFirstName, $editLastName, $editDob, $editUserAdd, $editContactNum, $profile_picture, $editUserId);
         if ($stmt->execute()) {
             // Redirect to refresh the page after successful update
             header("location: admindashboard.php");
@@ -109,48 +110,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editUserId'])) {
     }
 }
 
-// Handle form submission for updating listing
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editListingId'])) {
-    // Extract listing details from the form
-    $editListingId = $_POST['editListingId'];
-    $editListingName = $_POST['editListingName'];
-    $editListingPrice = $_POST['editListingPrice'];
-    $editListingDesc = $_POST['editListingDesc'];
-    $editListingStatus = $_POST['editListingStatus']; // Added status field
-
-    // Check if a new listing image file is uploaded
-    if ($_FILES['editListingImage']['error'] == UPLOAD_ERR_OK) {
-        // Get the file extension
-        $extension = pathinfo($_FILES['editListingImage']['name'], PATHINFO_EXTENSION);
-        // Generate a unique filename
-        $listing_image = 'uploads/' . uniqid() . '.' . $extension;
-        // Move the uploaded file to the desired location
-        move_uploaded_file($_FILES['editListingImage']['tmp_name'], $listing_image);
-    }
-
-    // Update the listing in the database with the status
-    $sql = "UPDATE listing SET listing_name = ?, listing_price = ?, listing_desc = ?, listing_image = ?, status = ? WHERE listing_id = ?";
-    if ($stmt = $mysqli->prepare($sql)) {
-        $stmt->bind_param("sssssi", $editListingName, $editListingPrice, $editListingDesc, $listing_image, $editListingStatus, $editListingId);
-        if ($stmt->execute()) {
-            // Redirect to refresh the page after successful update
-            header("location: admindashboard.php");
-            exit;
-        } else {
-            echo "Error updating listing details: " . $stmt->error;
-        }
-        $stmt->close();
-    } else {
-        echo "Error preparing statement: " . $mysqli->error;
-    }
-}
-
 // Define variables to store user details
 $user_data = array();
 $listing_data = array();
 
 // Fetch user details from the database
-$sql_users = "SELECT id, email_address, user_name, first_name, last_name, dob, profile_picture, user_add FROM users";
+$sql_users = "SELECT id, email_address, user_name, first_name, last_name, dob, profile_picture, user_add, contact_num FROM users";
 if ($result_users = $mysqli->query($sql_users)) {
     while ($row = $result_users->fetch_assoc()) {
         $user_data[] = $row;
@@ -200,6 +165,7 @@ $mysqli->close();
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Date of Birth</th>
+                            <th>Contact Number</th> <!-- Added contact number column -->
                             <th>Profile Picture</th>
                             <th>Address</th>
                             <th>Actions</th>
@@ -214,11 +180,12 @@ $mysqli->close();
                                 <td><?php echo $user['first_name']; ?></td>
                                 <td><?php echo $user['last_name']; ?></td>
                                 <td><?php echo $user['dob']; ?></td>
+                                <td><?php echo $user['contact_num']; ?></td> <!-- Display contact number -->
                                 <td><img src="<?php echo $user['profile_picture']; ?>" alt="Profile Picture" style="max-width: 100px;"></td>
                                 <td><?php echo $user['user_add']; ?></td>
                                 <td>
                                     <!-- Edit button -->
-                                    <button type="button" class="btn btn-primary edit-user-btn" data-toggle="modal" data-target="#editUserModal" data-id="<?php echo $user['id']; ?>" data-email="<?php echo $user['email_address']; ?>" data-username="<?php echo $user['user_name']; ?>" data-firstname="<?php echo $user['first_name']; ?>" data-lastname="<?php echo $user['last_name']; ?>" data-dob="<?php echo $user['dob']; ?>" data-address="<?php echo $user['user_add']; ?>">Edit</button>
+                                    <button type="button" class="btn btn-primary edit-user-btn" data-toggle="modal" data-target="#editUserModal" data-id="<?php echo $user['id']; ?>" data-email="<?php echo $user['email_address']; ?>" data-username="<?php echo $user['user_name']; ?>" data-firstname="<?php echo $user['first_name']; ?>" data-lastname="<?php echo $user['last_name']; ?>" data-dob="<?php echo $user['dob']; ?>" data-address="<?php echo $user['user_add']; ?>" data-contact="<?php echo $user['contact_num']; ?>">Edit</button>
                                     <!-- Delete button -->
                                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                         <input type="hidden" name="delete_user" value="<?php echo $user['id']; ?>">
@@ -318,6 +285,10 @@ $mysqli->close();
                             <input type="text" class="form-control" id="editUserAdd" name="editUserAdd" required>
                         </div>
                         <div class="form-group">
+                            <label for="editContactNum">Contact Number</label>
+                            <input type="text" class="form-control" id="editContactNum" name="editContactNum" required>
+                        </div>
+                        <div class="form-group">
                             <label for="editProfilePicture">Profile Picture</label>
                             <input type="file" class="form-control-file" id="editProfilePicture" name="editProfilePicture">
                         </div>
@@ -337,10 +308,10 @@ $mysqli->close();
                     <h5 class="modal-title" id="editListingModalLabel">Edit Listing</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                        </button>
                 </div>
                 <div class="modal-body">
-                    <form id="editListingForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+                    <form id="editListingForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <input type="hidden" id="editListingId" name="editListingId">
                         <div class="form-group">
                             <label for="editListingName">Listing Name</label>
@@ -355,14 +326,10 @@ $mysqli->close();
                             <textarea class="form-control" id="editListingDesc" name="editListingDesc" rows="3" required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="editListingImage">Listing Image</label>
-                            <input type="file" class="form-control-file" id="editListingImage" name="editListingImage">
-                        </div>
-                        <div class="form-group">
-                            <label for="editListingStatus">Status</label> <!-- Added status field -->
-                            <select class="form-control" id="editListingStatus" name="editListingStatus">
-                                <option value="available">Available</option>
-                                <option value="sold">Sold</option>
+                            <label for="editListingStatus">Status</label>
+                            <select class="form-control" id="editListingStatus" name="editListingStatus" required>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -372,13 +339,12 @@ $mysqli->close();
         </div>
     </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <script>
-        // Fill Edit User Modal with data when Edit button is clicked
+        // Function to populate edit user modal with data
         $(document).on("click", ".edit-user-btn", function() {
             var id = $(this).data('id');
             var email = $(this).data('email');
@@ -387,7 +353,7 @@ $mysqli->close();
             var lastname = $(this).data('lastname');
             var dob = $(this).data('dob');
             var address = $(this).data('address');
-
+            var contact = $(this).data('contact');
             $("#editUserId").val(id);
             $("#editEmail").val(email);
             $("#editUserName").val(username);
@@ -395,23 +361,25 @@ $mysqli->close();
             $("#editLastName").val(lastname);
             $("#editDob").val(dob);
             $("#editUserAdd").val(address);
+            $("#editContactNum").val(contact);
         });
 
-        // Fill Edit Listing Modal with data when Edit button is clicked
+        // Function to populate edit listing modal with data
         $(document).on("click", ".edit-listing-btn", function() {
             var id = $(this).data('id');
             var name = $(this).data('name');
             var price = $(this).data('price');
             var description = $(this).data('description');
-            var status = $(this).data('status'); // Get status data
-
+            var status = $(this).data('status');
             $("#editListingId").val(id);
             $("#editListingName").val(name);
             $("#editListingPrice").val(price);
             $("#editListingDesc").val(description);
-            $("#editListingStatus").val(status); // Set status value in the dropdown
+            $("#editListingStatus").val(status);
         });
     </script>
 </body>
 
 </html>
+
+
