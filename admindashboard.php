@@ -152,6 +152,18 @@ $mysqli->close();
         <h2>Welcome, <?php echo $_SESSION["admin_name"]; ?>!</h2>
         <p>This is your admin dashboard.</p>
 
+        <!-- Add this div before the user table -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info" role="alert">
+                    Total Users Registered: <?php echo count($user_data); ?>
+                </div>
+                <div class="alert alert-info" role="alert">
+                    Total Listings Uploaded: <?php echo count($listing_data); ?>
+                </div>
+            </div>
+        </div>
+
         <!-- Users Table -->
         <div class="row">
             <div class="col-md-12">
@@ -308,7 +320,7 @@ $mysqli->close();
                     <h5 class="modal-title" id="editListingModalLabel">Edit Listing</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                        </button>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <form id="editListingForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -381,5 +393,3 @@ $mysqli->close();
 </body>
 
 </html>
-
-
