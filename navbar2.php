@@ -34,7 +34,7 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
   <nav class="navbar">
     <div class="logo">
       <i class="fa-solid fa-font-awesome"></i>
-      <img src="logo.svg">
+      <img src="logom.png">
       <a href="#">REPS</a>
     </div>
     <div class="menu">
