@@ -42,8 +42,6 @@ if ($stmt = $mysqli->prepare($sql)) {
                     'status' => $status
                 );
             }
-        } else {
-            echo "<p>No listings uploaded by the user.</p>";
         }
     } else {
         echo "Oops! Something went wrong. Please try again later.";
@@ -149,7 +147,7 @@ $mysqli->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Listings</title>
+    <title>Your Listings</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .card-body {
@@ -217,7 +215,10 @@ $mysqli->close();
     <div class="container">
         <h1>Your Listings</h1>
         <?php if (empty($user_listings)) : ?>
-            <p>No listings uploaded by the user.</p>
+            <script>
+                alert("No listings uploaded by the user.");
+                window.location.href = 'listing.php';
+            </script>
         <?php else : ?>
             <div class="row">
                 <?php foreach ($user_listings as $listing) : ?>
@@ -290,4 +291,3 @@ $mysqli->close();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
