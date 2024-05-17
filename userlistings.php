@@ -148,72 +148,22 @@ $mysqli->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Listings</title>
+    <link rel="stylesheet" href="userlistings.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .card-body {
-            height: 250px; /* Set a fixed height for the card body */
-            overflow: hidden; /* Hide overflow content */
-        }
 
-        .card-img-top {
-            width: 100%;
-            height: 250px;
-            object-fit: contain;
-        }
-
-        .card {
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            align-content: center;
-            margin-bottom: 20px; /* Added margin bottom */
-        }
-
-        body {
-            background-color: #218838;
-            font-family: "Ubuntu", sans-serif;
-        }
-
-        h1 {
-            text-align: center;
-            font-family: 'Poppins';
-            font-size: 40px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-top: 50px;
-        }
-
-        h2 {
-            text-align: left;
-            font-family: 'Poppins';
-            font-size: 30px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 50px;
-        }
-
-        .status-available {
-            background-color: #28a745;
-            color: white;
-            padding: 2px 5px;
-            border-radius: 5px;
-        }
-
-        .status-sold {
-            background-color: #dc3545;
-            color: white;
-            padding: 2px 5px;
-            border-radius: 5px;
-        }
-
-        h5 {
-
-        }
-    </style>
 </head>
 
 <body>
+<main>
+    <div class="nero">
+      <div class="nero__heading">
+        <span class="nero__bold">Your </span> Listings
+      </div>
+      <p class="nero__text">
+      </p>
+    </div>
+  </main>
     <div class="container">
-        <h1>Your Listings</h1>
         <?php if (empty($user_listings)) : ?>
             <script>
                 alert("No listings uploaded by the user.");

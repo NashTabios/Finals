@@ -50,90 +50,30 @@ $mysqli->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listing Page</title>
+    <link rel="stylesheet" href="listing.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .card-body {
-            height: 250px; /* Set a fixed height for the card body */
-            overflow: hidden; /* Hide overflow content */
-        }
-
-        .card{
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            align-content: center;
-        }
-
-        .card-img-top {
-            width: 100%;
-            height: 250px;
-            object-fit: contain;
-        }
-
-        .card-img{
-            width: 100%;
-            height: 350px;
-            object-fit: contain;
-        }
-
-        body{
-        /* width: 100%;
-        min-height: 100vh; */
-        background-color: #218838;
-        font-family: "Ubuntu", sans-serif;
-        }
-
-        h1{
-            text-align: center;
-            font-family: 'Poppins';
-            font-size: 40px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-top: 50px;   
-        }
-
-        h2{
-            text-align: left;
-            font-family: 'Poppins';
-            font-size: 30px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 50px;   
-        }
-
-        .status-available {
-            background-color: #28a745;
-            color: white;
-            padding: 2px 5px;
-            border-radius: 5px;
-        }
-
-        .status-sold {
-            background-color: #dc3545;
-            color: white;
-            padding: 2px 5px;
-            border-radius: 5px;
-        }
-
-        h5{
-            
-        }
-
-    </style>
 </head>
 
 <body>
+<main>
+    <div class="nero">
+      <div class="nero__heading">
+        <span class="nero__bold">Welcome to </span>Marketplace
+      </div>
+      <p class="nero__text">
+      </p>
+    </div>
+  </main>
     <div class="container">
-        <h1>Welcome to the Marketplace</h1>
         <?php if (isset($user_name)) : ?>
             <p style="text-align: right;">Welcome, <?php echo htmlspecialchars($user_name); ?>!</p>
-            <p style="text-align: right;"><a href="createlisting.php">Create Listing</a></p>
-            <p style="text-align: right;"><a href="profile.php">Profile</a></p>
+            <p style="text-align: right;"><a href="createlisting.php"> + Create Listing</a></p>
             <p style="text-align: right;"><a href="userlistings.php">Your Listings</a></p>
         <?php else : ?>
             <p style="text-align: right;">Welcome! <a href="login.php">Log in</a> or <a href="register.php">Register</a> to create listings.</p>
         <?php endif; ?>
 
-        <h2>Today's pick</h2>
+        <h2 class="pick">Today's pick</h2>
         <div class="row">
             <?php foreach ($listings as $listing) : ?>
                 <div class="col-md-4 mb-4">
