@@ -34,6 +34,8 @@ a {
 }
 
 .landing {
+  background-image: url('indexbg.svg');
+  background-size: contain;
   flex: 1;
   display: flex;
   flex-direction: column;

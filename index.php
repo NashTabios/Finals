@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="index2.css" />
     <link rel="stylesheet" href="footer.css" />
+    <link rel="stylesheet" href="cards.css" />
   </head>
   <body>
     <aside class="menu">
@@ -46,8 +47,83 @@
     </div>
 
     <section class="section">
-      <h1>second part</h1>
-      <p>hindi ko alam ilalagay</p>
+      <h1>Meet the Developers!</h1>
+      <p>Future graduates of UST</p>
+
+    <br>
+    <br>
+    <br>
+        <div class="card-container-wrapper">
+        <div class="card-container">
+        <div class="card">
+        <div class="img-content">
+        <img src="./imgs/imag1.png">
+        </div>
+        <div class="content">
+            <p class="heading">Kenn</p>
+            <p>
+            CHIEF EXECUTIVE OFFICER
+            </p>
+        </div>
+        </div>
+        </div>  
+        <div class="card-container-wrapper">
+        <div class="card-container">
+        <div class="card">
+        <div class="img-content">
+        <img src="./imgs/imag3.png">
+        </div>
+        <div class="content">
+            <p class="heading">Nash</p>
+            <p>
+            CHIEF OPERATING OFFICER
+            </p>
+        </div>
+        </div>
+        </div>
+        <div class="card-container-wrapper">
+        <div class="card-container">
+        <div class="card">
+        <div class="img-content">
+        <img src="./imgs/imag2.png">
+        </div>
+        <div class="content">
+            <p class="heading">Shawn</p>
+            <p>
+            CHIEF TECHNOLOGY OFFICER
+            </p>
+        </div>
+        </div>
+        </div>
+        <div class="card-container-wrapper">
+        <div class="card-container">
+        <div class="card">
+        <div class="img-content">
+        <img src="./imgs/imag4.png">
+        </div>
+        <div class="content">
+            <p class="heading">Paul</p>
+            <p>
+            CHAIRMAN
+            </p>
+        </div>
+        </div>
+        </div>
+        <div class="card-container-wrapper">
+        <div class="card-container">
+        <div class="card">
+        <div class="img-content">
+        <img src="./imgs/imag5.png">
+        </div>
+        <div class="content">
+            <p class="heading">Billy</p>
+            <p>
+            CHIEF FINANCIAL OFFICER
+            </p>
+        </div>
+        </div>
+        </div>
+
     </section>
 
     <?php include 'footer.php'; ?>
