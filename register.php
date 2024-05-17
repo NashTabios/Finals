@@ -1,7 +1,7 @@
 <?php
 // Include config file
 require_once "config.php";
-include 'navbar.php';
+include 'navbar2.php';
 
 // Define variables and initialize with empty values
 $email_address = $user_name = $first_name = $last_name = $dob = $pass = "";

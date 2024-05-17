@@ -3,7 +3,7 @@ session_start();
 
 // Include config file
 require_once "config.php";
-include 'navbar.php';
+include 'navbar2.php';
 
 // Check if the user is logged in, then retrieve their username
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {

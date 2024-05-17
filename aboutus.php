@@ -1,3 +1,4 @@
+<?php include 'navbar2.php'; ?>
 <html>
     <head>
         <title>About Us - R.E.P.S</title>
@@ -7,7 +8,6 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" >
     </head>
     <body>
-        <?php include 'navbar.php'; ?>
         <section>
             <div class="about-us">
                 <h1>About Us</h1>
