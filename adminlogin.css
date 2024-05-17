@@ -1,0 +1,101 @@
+html, body {
+    background-color: #009506;
+    /* overflow: hidden; */
+    /* padding: 40px; */
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 450px;
+    margin: auto;
+    background: #fff;
+    padding: 40px;
+    width: 420px;
+    border-radius: 100px; /* Adjust the value to control the curve */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* Add box shadow */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.login-container h2 {   
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-container form {
+    margin-top: 20px;
+}
+
+.login-container form .form-group {
+    margin-bottom: 20px;
+}
+
+.login-container form label {
+    font-weight: bold;
+}
+
+.login-container form input[type="text"],
+.login-container form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #14913b;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-container form .btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745; /* Change the background color */
+    border-color: #28a745; /* Change the border color */
+    color: #fff; /* Change the text color */
+}
+
+.login-container form .btn-primary:hover {
+    background-color: #218838; /* Change the background color on hover */
+    border-color: #64896d; /* Change the border color on hover */
+    color: #fff; /* Change the text color on hover */
+}
+
+.login-container form p {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-container .social-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.social-buttons .btn {
+    flex: 1; /* Make both buttons occupy equal space */
+    margin-right: 10px; /* Add some space between the buttons */
+}
+
+.login-container .btn {
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    gap: 10px;
+    border: 1px solid #ededef;
+    background-color: white;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+  
+.login-container .btn:hover {
+    border: 1px solid #2d79f3;
+    ;
+  }
+
+
+.title {
+    text-align: center;
+}
+

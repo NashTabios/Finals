@@ -3,7 +3,7 @@ session_start();
 
 // Include config file
 require_once "config.php";
-include 'navbar.php';
+include 'navbar2.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
@@ -18,12 +18,12 @@ if (!isset($_GET['id']) || empty(trim($_GET["id"]))) {
 }
 
 // Initialize variables
-$listing_name = $listing_price = $listing_desc = $listing_image = $user_name = "";
+$listing_name = $listing_price = $listing_desc = $listing_image = $user_name = $status = "";
 $email_address = $first_name = $last_name = "";
 $profile_picture = $user_add = "";
 
 // Prepare a select statement to retrieve listing details
-$sql_listing = "SELECT listing_name, listing_price, listing_desc, listing_image, user_name FROM listing WHERE listing_id = ?";
+$sql_listing = "SELECT listing_name, listing_price, listing_desc, listing_image, user_name, status FROM listing WHERE listing_id = ?";
 
 if ($stmt_listing = $mysqli->prepare($sql_listing)) {
     // Bind variables to the prepared statement as parameters
@@ -40,7 +40,7 @@ if ($stmt_listing = $mysqli->prepare($sql_listing)) {
         // Check if listing exists
         if ($stmt_listing->num_rows == 1) {
             // Bind result variables
-            $stmt_listing->bind_result($listing_name, $listing_price, $listing_desc, $listing_image, $user_name);
+            $stmt_listing->bind_result($listing_name, $listing_price, $listing_desc, $listing_image, $user_name, $status);
             $stmt_listing->fetch();
         } else {
             echo "Listing not found.";
@@ -121,6 +121,7 @@ $mysqli->close();
                 <h2><?php echo htmlspecialchars($listing_name); ?></h2>
                 <p><?php echo htmlspecialchars($listing_desc); ?></p>
                 <p>Price: ₱<?php echo htmlspecialchars($listing_price); ?></p>
+                <p>Status: <?php echo htmlspecialchars($status); ?></p>
                 <p>Uploaded by: <?php echo htmlspecialchars($user_name); ?></p>
             </div>
         </div>
@@ -139,4 +140,3 @@ $mysqli->close();
 </body>
 
 </html>
-

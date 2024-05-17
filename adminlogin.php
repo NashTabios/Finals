@@ -3,7 +3,7 @@ session_start();
 
 // Include config file
 require_once "config.php";
-include 'navbar.php';
+include 'navbar2.php';
 
 // Define variables and initialize with empty values
 $admin_email = $admin_pass = "";
@@ -93,13 +93,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REPS - Admin Page Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="adminlogin.css">
 </head>
 
 <body>
+    <div class="title">
     <h1>REPS - Admin</h1>
+    </div>
     <div class="login-container">
         <h2>Sign In</h2>
-        <p>Please fill in your credentials to login.</p>
+        <p>Please fill in your admin credentials to login.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
                 <label for="admin_email">Email Address</label>

@@ -27,7 +27,7 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
 $listings = [];
 
 // Retrieve listings from the database
-$sql = "SELECT listing_id, listing_name, listing_price, listing_desc, listing_image, user_name FROM listing";
+$sql = "SELECT listing_id, listing_name, listing_price, listing_image, user_name, status FROM listing";
 if ($result = $mysqli->query($sql)) {
     // Fetch result rows as associative array
     while ($row = $result->fetch_assoc()) {
@@ -58,45 +58,57 @@ $mysqli->close();
         }
 
         .card{
-        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-        align-content: center;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            align-content: center;
         }
 
         .card-img-top {
-        width: 100%;
-        height: 250px;
-        object-fit: contain;
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
         }
 
         .card-img{
-        width: 100%;
-        height: 350px;
-        object-fit: contain;
+            width: 100%;
+            height: 350px;
+            object-fit: contain;
         }
 
         body{
-        /* width: 100%;
-        min-height: 100vh; */
-        background-color: #218838;
+            background-color: #218838;
         }
 
         h1{
-        text-align: center;
-        font-family: 'Poppins';
-        font-size: 40px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-top: 50px;   
+            text-align: center;
+            font-family: 'Poppins';
+            font-size: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 50px;   
         }
 
         h2{
-        text-align: left;
-        font-family: 'Poppins';
-        font-size: 30px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 50px;   
+            text-align: left;
+            font-family: 'Poppins';
+            font-size: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 50px;   
+        }
+
+        .status-available {
+            background-color: #28a745;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }
+
+        .status-sold {
+            background-color: #dc3545;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 5px;
         }
 
     </style>
@@ -122,9 +134,11 @@ $mysqli->close();
                         <img src="<?php echo htmlspecialchars($listing['listing_image']); ?>" class="card-img-top" alt="Listing Image">
                         <div class="card-body">
                             <h5 class="card-title"><a href="listingdetails.php?id=<?php echo $listing['listing_id']; ?>"><?php echo htmlspecialchars($listing['listing_name']); ?></a></h5>
-                            <p class="card-text"><?php echo htmlspecialchars($listing['listing_desc']); ?></p>
                             <p class="card-text">Price: ₱<?php echo htmlspecialchars($listing['listing_price']); ?></p>
                             <p class="card-text">Uploaded by: <?php echo htmlspecialchars($listing['user_name']); ?></p>
+                            <?php if (!empty($listing['status'])) : ?>
+                                <p class="<?php echo ($listing['status'] === 'available') ? 'status-available' : 'status-sold'; ?>"><?php echo htmlspecialchars($listing['status']); ?></p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

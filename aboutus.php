@@ -1,15 +1,11 @@
 <?php 
 session_start(); // Start the session
 
-// Check if the user is not logged in, redirect to login page
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: login.php"); // Redirect to login page
-    exit; // Stop executing the script
-}
+// Check if the user is logged in
+$loggedin = isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true;
 
 include 'navbar2.php'; // Include the navbar
 
-// HTML content for About Us page continues below...
 ?>
 
 <html>
