@@ -132,22 +132,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <br>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label>Listing Name</label>
+                        <label>Item Name</label>
                         <input type="text" name="listing_name" class="form-control <?php echo (!empty($listing_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $listing_name; ?>">
                         <span class="invalid-feedback"><?php echo $listing_name_err; ?></span>
                     </div>
                     <div class="form-group">
-                        <label>Listing Price</label>
+                        <label> Price</label>
                         <input type="text" name="listing_price" class="form-control <?php echo (!empty($listing_price_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $listing_price; ?>">
                         <span class="invalid-feedback"><?php echo $listing_price_err; ?></span>
                     </div>
                     <div class="form-group">
-                        <label>Listing Description</label>
+                        <label> Description</label>
                         <textarea name="listing_desc" class="form-control <?php echo (!empty($listing_desc_err)) ? 'is-invalid' : ''; ?>"><?php echo $listing_desc; ?></textarea>
                         <span class="invalid-feedback"><?php echo $listing_desc_err; ?></span>
                     </div>
                     <div class="form-group">
-                        <label>Listing Image</label>
+                        <label>Upload Image</label>
                         <input type="file" name="listing_image" class="form-control-file <?php echo (!empty($listing_image_err)) ? 'is-invalid' : ''; ?>">
                         <span class="invalid-feedback"><?php echo $listing_image_err; ?></span>
                     </div>
