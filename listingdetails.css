@@ -1,8 +1,19 @@
 .container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 20px; /* Adds space between the main sections */
+    margin-top: 75px;
+    padding: 20px;
+    border-radius: 20px;
+    
+
+}
+
+.row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .listing-details {
@@ -15,26 +26,30 @@
 }
 
 .listing-image {
-    padding-top: 30px;
-    max-width: 100%;
-    height: auto;
-    max-height: 300px;
-    flex-shrink: 0; /* Prevents the image from shrinking */
+    width: 500px;
+    height: fit-content;
+    object-fit: contain;
+
 }
+
 
 .box {
     background: #fff;
     border: solid 1px #e6e6e6;
     padding: 20px;
-    width: 75%; /* Fixed width for the box */
+    width: 100%; /* Fixed width for the box */
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
     text-align: left;
     flex-shrink: 0; /* Prevents the box from shrinking */
 }
 
 .profile-picture {
-    max-width: 150px;
-    height: auto;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    width: 150px;
+    height: 150px;
+    padding: 1px;
+        
 }
 
 .nero {
@@ -60,51 +75,6 @@
 .nero__text {
     font-size: 30px;
 }
-
-.profile-picture{
-    border-radius: 300px;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px; /* Adds space between the main sections */
-}
-
-.listing-details {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 20px; /* Adds space between the image and the box */
-    width: 100%;
-    max-width: 1200px; /* Optional: constrain the width of the container */
-}
-
-.listing-image {
-    padding-top: 30px;
-    max-width: 100%;
-    height: auto;
-    max-height: 300px;
-    flex-shrink: 0; /* Prevents the image from shrinking */
-}
-
-.box {
-    background: #fff;
-    border: solid 1px #e6e6e6;
-    padding: 20px;
-    width: 75%; /* Fixed width for the box */
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    flex-shrink: 0; /* Prevents the box from shrinking */
-}
-
-.profile-picture {
-    max-width: 150px;
-    height: auto;
-    border-radius: 300px;
-}
-
 
 @media (max-width: 768px) {
     .single {
