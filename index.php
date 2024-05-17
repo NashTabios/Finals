@@ -61,7 +61,7 @@
         </div>
         <div class="content">
             <p class="heading">Kenn</p>
-            <p>
+            <p class="desc">
             CHIEF EXECUTIVE OFFICER
             </p>
         </div>
@@ -75,7 +75,7 @@
         </div>
         <div class="content">
             <p class="heading">Nash</p>
-            <p>
+            <p class="desc">
             CHIEF OPERATING OFFICER
             </p>
         </div>
@@ -89,7 +89,7 @@
         </div>
         <div class="content">
             <p class="heading">Shawn</p>
-            <p>
+            <p class="desc">
             CHIEF TECHNOLOGY OFFICER
             </p>
         </div>
@@ -103,7 +103,7 @@
         </div>
         <div class="content">
             <p class="heading">Paul</p>
-            <p>
+            <p class="desc">
             CHAIRMAN
             </p>
         </div>
@@ -117,7 +117,7 @@
         </div>
         <div class="content">
             <p class="heading">Billy</p>
-            <p>
+            <p class="desc">
             CHIEF FINANCIAL OFFICER
             </p>
         </div>

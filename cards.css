@@ -87,4 +87,9 @@
   .card-container-wrapper {
     display: flex;
   }
-  
+  .heading {
+    color: white;
+  }
+  .desc {
+    color: white;
+  }
