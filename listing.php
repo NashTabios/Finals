@@ -53,7 +53,7 @@ $mysqli->close();
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .card-body {
-            height: 200px; /* Set a fixed height for the card body */
+            height: 250px; /* Set a fixed height for the card body */
             overflow: hidden; /* Hide overflow content */
         }
 
@@ -76,7 +76,14 @@ $mysqli->close();
         }
 
         body{
+<<<<<<< HEAD
             background-color: #218838;
+=======
+        /* width: 100%;
+        min-height: 100vh; */
+        background-color: #218838;
+        font-family: "Ubuntu", sans-serif;
+>>>>>>> c00a008652e2d6d8ecc3b54fa2a46ba139babd46
         }
 
         h1{
@@ -109,6 +116,10 @@ $mysqli->close();
             color: white;
             padding: 2px 5px;
             border-radius: 5px;
+        }
+
+        h5{
+            
         }
 
     </style>
