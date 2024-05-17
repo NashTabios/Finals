@@ -122,10 +122,8 @@ $mysqli->close();
                 <p>Status: <?php echo htmlspecialchars($status); ?></p>
                 <p>Uploaded by: <?php echo htmlspecialchars($user_name); ?></p>
                 </div>
-            </div>
-        </div>
-        <div>
-            <h3>Uploader Details</h3>
+        <div class="box same-height"><!-- box same-height Starts -->
+        <h3 class="text-center"> Seller information </h3>
             <?php if (!empty($profile_picture)) : ?>
                 <img src="<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" class="profile-picture">
             <?php endif; ?>
@@ -135,6 +133,7 @@ $mysqli->close();
             <p>First Name: <?php echo htmlspecialchars($first_name); ?></p>
             <p>Last Name: <?php echo htmlspecialchars($last_name); ?></p>
             <p>User Address: <?php echo htmlspecialchars($user_add); ?></p>
+        </div>
         </div>
     </div>
 </body>
