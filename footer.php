@@ -27,17 +27,17 @@
             <div>
               <h3>REPS</h3>
               <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="aboutus.php">About</a></li>
+                <li><a href="aboutus.php">Contact Us</a></li>
               </ul>
             </div>
-            <div>
+            <!-- <div>
               <h3>2ITI</h3>
               <ul>
                 <li><a href="#">Pricing</a></li>
                 <li><a href="#">Community</a></li>
               </ul>
-            </div>
+            </div> -->
             <div>
               <h3>Connect</h3>
               <ul>
