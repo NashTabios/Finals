@@ -152,9 +152,6 @@ $mysqli->close();
             <?php endforeach; ?>
         </div>
 
-        <?php if (isset($user_name)) : ?>
-            <p><a href="?logout=1">Sign Out</a></p>
-        <?php endif; ?>
     </div>
 </body>
 
