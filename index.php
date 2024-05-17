@@ -50,10 +50,6 @@
       <p>hindi ko alam ilalagay</p>
     </section>
 
-    <section class="section">
-      <h1>third section</h1>
-    </section>
-
     <?php include 'footer.php'; ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
