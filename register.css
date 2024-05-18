@@ -5,6 +5,7 @@
 }
 html, body{
     overflow:hidden;
+    
 }
 body {
     margin: 0;
@@ -18,7 +19,7 @@ body {
 
 .container {
     display: flex;
-    height: 85vh;
+    height: 80px;
 }
 
 .formcontainert, .form-container {
@@ -59,7 +60,7 @@ body {
     background-color: white;
     position:relative;
     padding: 20px 80px;
-    border-radius: 5px;
+    border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     height: auto;
     width: 40%;

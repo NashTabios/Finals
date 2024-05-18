@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         if (move_uploaded_file($_FILES["listing_image"]["tmp_name"], $targetFile)) {
             // File uploaded successfully, proceed with other data insertion
-            $status = "available"; // Set the status
+            $status = "Available"; // Set the status
             $sql = "INSERT INTO listing (listing_name, listing_price, listing_desc, listing_image, user_name, status) VALUES (?, ?, ?, ?, ?, ?)";
 
             if ($stmt = $mysqli->prepare($sql)) {

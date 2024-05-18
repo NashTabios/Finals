@@ -219,8 +219,8 @@ $mysqli->close();
                                         <div class="form-group">
                                             <label for="edit_listing_status_<?php echo $listing['listing_id']; ?>">Status</label>
                                             <select class="form-control" id="edit_listing_status_<?php echo $listing['listing_id']; ?>" name="edit_listing_status">
-                                                <option value="available" <?php if ($listing['status'] === 'available') echo 'selected'; ?>>Available</option>
-                                                <option value="sold" <?php if ($listing['status'] === 'sold') echo 'selected'; ?>>Sold</option>
+                                                <option value="Available" <?php if ($listing['status'] === 'Available') echo 'selected'; ?>>Available</option>
+                                                <option value="Sold" <?php if ($listing['status'] === 'Sold') echo 'selected'; ?>>Sold</option>
                                             </select>
                                         </div>
                                         <div class="form-group">

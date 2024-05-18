@@ -30,7 +30,7 @@
     <div class="container">
       <nav class="navbar">
         <div class="nav-logo">
-          <p>EcoMarket</p>
+          <p>REPS</p>
         </div>
         <div class="nav-items">
          <!-- <a href="index.php" class="menu-item">Home</a> -->

@@ -189,6 +189,13 @@ $mysqli->close();
         }
     </script>
     <style>
+        body{
+    background-image: url('./imgs/bgsection.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;    /* overflow: hidden; */
+    /* padding: 40px; */
+        }
         .container {
             max-width: 1000px;
             margin-top: 75px;
@@ -234,6 +241,7 @@ $mysqli->close();
 </head>
 
 <body>
+<?php include 'navbar2.php'; ?>
     <div class="container">
         <div class="row">
             <div class="user-content mb-3">

@@ -1,6 +1,8 @@
 html, body {
-    background-color: #009506;
-    /* overflow: hidden; */
+    background-image: url('./imgs/bgsection.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;    /* overflow: hidden; */
     /* padding: 40px; */
 }
 

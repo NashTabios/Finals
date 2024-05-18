@@ -37,7 +37,7 @@
     background: #fff;
     border: solid 1px #e6e6e6;
     padding: 20px;
-    width: 100%; /* Fixed width for the box */
+    width: 600px; /* Fixed width for the box */
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
     text-align: left;
     flex-shrink: 0; /* Prevents the box from shrinking */
