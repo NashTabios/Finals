@@ -381,8 +381,8 @@ $mysqli->close();
                         <div class="form-group">
                             <label for="editListingStatus">Status</label>
                             <select class="form-control" id="editListingStatus" name="editListingStatus" required>
-                                <option value="available">Available</option>
-                                <option value="sold">Sold</option>
+                                <option value="Available">Available</option>
+                                <option value="Sold">Sold</option>
                             </select>
                         </div>
                         <div class="form-group">

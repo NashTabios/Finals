@@ -84,7 +84,7 @@ $mysqli->close();
                             <p class="card-text"><strong>Price: </strong>₱<?php echo htmlspecialchars($listing['listing_price']); ?></p>
                             <p class="card-text"><strong>Uploaded by: </strong><?php echo htmlspecialchars($listing['user_name']); ?></p>
                             <?php if (!empty($listing['status'])) : ?>
-                                <p class="<?php echo ($listing['status'] === 'available') ? 'status-available' : 'status-sold'; ?>"><?php echo htmlspecialchars($listing['status']); ?></p>
+                                <p class="<?php echo ($listing['status'] === 'Available') ? 'status-available' : 'status-sold'; ?>"><?php echo htmlspecialchars($listing['status']); ?></p>
                             <?php endif; ?>
                         </div>
                     </div>
