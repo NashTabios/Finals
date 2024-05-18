@@ -3,6 +3,7 @@ session_start();
 
 // Include config file
 require_once "config.php";
+include 'navbar2.php';
 
 // Define variables and initialize with empty values
 $email_address = $pass = "";
@@ -95,7 +96,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body style="background-color: #009506;">
-    <?php include 'navbar2.php'; ?>
     <br>
     <br>
     <div class="login-container">

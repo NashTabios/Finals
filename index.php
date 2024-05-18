@@ -33,7 +33,7 @@
           <p>REPS</p>
         </div>
         <div class="nav-items">
-         <!-- <a href="index.php" class="menu-item">Home</a> -->
+         <a href="index.php" class="menu-item">Home</a>
          <a href="aboutus.php" class="menu-item">About Us</a>
          <a href="login.php" class="menu-item">Sign-In</a>
          <a href="register.php" class="menu-item">Sign-Up</a>
