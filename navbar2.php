@@ -55,10 +55,10 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
       <a href="aboutus.php">About</a>
     </div>
     <a href="login.php">
-      <button class="log-in">Sign-In</button>
+      <button class="log-in">Log-In</button>
     </a>
     <a href="register.php">
-      <button class="log-in">Sign-Up</button>
+      <button class="log-in">Create an account</button>
     </a>
     </div>
   <?php endif; ?>
