@@ -81,8 +81,8 @@ $mysqli->close();
                         <img src="<?php echo htmlspecialchars($listing['listing_image']); ?>" class="card-img-top" alt="Listing Image">
                         <div class="card-body">
                             <h5 class="card-title"><a href="listingdetails.php?id=<?php echo $listing['listing_id']; ?>"><?php echo htmlspecialchars($listing['listing_name']); ?></a></h5>
-                            <p class="card-text">Price: ₱<?php echo htmlspecialchars($listing['listing_price']); ?></p>
-                            <p class="card-text">Uploaded by: <?php echo htmlspecialchars($listing['user_name']); ?></p>
+                            <p class="card-text"><strong>Price: </strong>₱<?php echo htmlspecialchars($listing['listing_price']); ?></p>
+                            <p class="card-text"><strong>Uploaded by: </strong><?php echo htmlspecialchars($listing['user_name']); ?></p>
                             <?php if (!empty($listing['status'])) : ?>
                                 <p class="<?php echo ($listing['status'] === 'available') ? 'status-available' : 'status-sold'; ?>"><?php echo htmlspecialchars($listing['status']); ?></p>
                             <?php endif; ?>
