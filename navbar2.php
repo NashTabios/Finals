@@ -33,9 +33,9 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
 <body>
   <nav class="navbar">
     <div class="logo">
-      <i class="fa-solid fa-font-awesome"></i>
-      <!-- <img src="logom.png"> -->
-      <a href="#">REPS</a>
+      <!-- <i class="fa-solid fa-font-awesome"></i> -->
+      <img src="logom.png">
+      <!-- <a href="#">REPS</a> -->
     </div>
     <div class="menu">
       <?php if (isset($user_name)) : ?>
