@@ -110,6 +110,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editUserId'])) {
     }
 }
 
+// Handle form submission for updating listing
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editListingId'])) {
+    // Extract listing details from the form
+    $editListingId = $_POST['editListingId'];
+    $editListingName = $_POST['editListingName'];
+    $editListingPrice = $_POST['editListingPrice'];
+    $editListingDesc = $_POST['editListingDesc'];
+    $editListingStatus = $_POST['editListingStatus'];
+
+    // Check if a new listing image file is uploaded
+    if ($_FILES['editListingImage']['error'] == UPLOAD_ERR_OK) {
+        // Get the file extension
+        $extension = pathinfo($_FILES['editListingImage']['name'], PATHINFO_EXTENSION);
+        // Generate a unique filename
+        $listing_image = 'uploads/' . uniqid() . '.' . $extension;
+        // Move the uploaded file to the desired location
+        move_uploaded_file($_FILES['editListingImage']['tmp_name'], $listing_image);
+    } else {
+        // If no new image is uploaded, keep the existing image
+        $listing_image = $_POST['existingListingImage'];
+    }
+
+    // Update the listing in the database
+    $sql = "UPDATE listing SET listing_name = ?, listing_price = ?, listing_desc = ?, listing_image = ?, status = ? WHERE listing_id = ?";
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param("sssssi", $editListingName, $editListingPrice, $editListingDesc, $listing_image, $editListingStatus, $editListingId);
+        if ($stmt->execute()) {
+            // Redirect to refresh the page after successful update
+            header("location: admindashboard.php");
+            exit;
+        } else {
+            echo "Error updating listing details: " . $stmt->error;
+        }
+        $stmt->close();
+    } else {
+        echo "Error preparing statement: " . $mysqli->error;
+    }
+}
+
 // Define variables to store user details
 $user_data = array();
 $listing_data = array();
@@ -135,6 +174,8 @@ if ($result_listings = $mysqli->query($sql_listings)) {
 // Close connection
 $mysqli->close();
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -323,7 +364,7 @@ $mysqli->close();
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="editListingForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <form id="editListingForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                         <input type="hidden" id="editListingId" name="editListingId">
                         <div class="form-group">
                             <label for="editListingName">Listing Name</label>
@@ -340,16 +381,22 @@ $mysqli->close();
                         <div class="form-group">
                             <label for="editListingStatus">Status</label>
                             <select class="form-control" id="editListingStatus" name="editListingStatus" required>
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
+                                <option value="available">Available</option>
+                                <option value="sold">Sold</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="editListingImage">Listing Image</label>
+                            <input type="file" class="form-control" id="editListingImage" name="editListingImage">
+                        </div>
+                        <input type="hidden" id="existingListingImage" name="existingListingImage">
                         <button type="submit" class="btn btn-primary">Save Changes</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
