@@ -130,7 +130,7 @@ $mysqli->close();
             </div>
 
             <div class="box same-height"><!-- box same-height Starts -->
-                <h3 class="text-center"> Seller information </h3>
+                <h3 class="text-center"> Seller Information </h3>
                 <br>
                 <div class="row">
                 <?php if (!empty($profile_picture)) : ?>
